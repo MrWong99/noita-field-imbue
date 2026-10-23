@@ -63,7 +63,7 @@ that owns the enemy, as Entangled Worlds expects.
 
 ## Install
 
-- **Steam Workshop:** subscribe to *Field Imbue*.
+- **Steam Workshop:** subscribe to [Field Imbue](https://steamcommunity.com/sharedfiles/filedetails/?id=3825663162).
 - **Manual:** download the zip from [Releases](https://github.com/MrWong99/noita-field-imbue/releases) and extract it into
   `Noita/mods/`, so that you get `Noita/mods/field_imbue/mod.xml`. Then enable *Field Imbue* in the in-game Mods menu.
 
