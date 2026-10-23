@@ -1,0 +1,17 @@
+<Entity>
+  <LuaComponent
+    script_source_file="mods/field_imbue/files/scripts/field_init.lua"
+    execute_every_n_frame="1"
+    remove_after_executed="1" />
+  <LuaComponent
+    _tags="fi_tick"
+    _enabled="0"
+    script_source_file="mods/field_imbue/files/scripts/field_tick.lua"
+    execute_every_n_frame="1" />
+  <!-- vanilla GameAreaEffectComponent applies a circle's effects once per entity; this re-applies them -->
+  <LuaComponent
+    _tags="fi_reapply"
+    _enabled="0"
+    script_source_file="mods/field_imbue/files/scripts/field_reapply.lua"
+    execute_every_n_frame="60" />
+</Entity>

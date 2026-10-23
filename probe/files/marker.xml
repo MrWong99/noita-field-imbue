@@ -1,0 +1,3 @@
+<Entity>
+  <VariableStorageComponent name="fi_mod" value_string="FI_PROBE_MARKER" />
+</Entity>

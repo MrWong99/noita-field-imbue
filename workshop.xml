@@ -1,0 +1,8 @@
+<Mod
+	name="Field Imbue"
+	description="Adds [b]Field resonance[/b], a new modifier for circle spells (Circle of fervour, stillness, thunder, ...).&#10;&#10;Cast it together with a circle and any other modifiers. The circle then:&#10;[list]&#10;[*] gives those modifiers to every projectile that flies through it: a Spark bolt through a Burning trail circle comes out burning, through a Homing circle it homes, through a Heavy shot circle it hits harder&#10;[*] keeps applying their effects (fire, freeze, oil, poison, ...) to enemies standing inside it&#10;[*] runs their material converters (Water to poison, ...) over the whole circle&#10;[/list]&#10;Works with 130 vanilla modifiers, and modifiers from other mods are picked up automatically. Circles cast without Field resonance stay vanilla.&#10;&#10;[b]Settings[/b] (apply from the next new run):&#10;[list]&#10;[*] Imbue enemy projectiles (off): circles also imbue enemy shots&#10;[*] Allow Nuke orbit and Chaos magic (off): lets circles hand those out too - can cause heavy lag&#10;[/list]&#10;[b]Entangled Worlds[/b]: works in multiplayer. Every player needs the mod and the same settings.&#10;&#10;Source, notes and issues: https://github.com/MrWong99/noita-field-imbue (MIT)"
+	tags="spells,gameplay"
+	dont_upload_folders=".git|probe|docs|tools|dist"
+	dont_upload_files="README.md|LICENSE|.gitignore"
+>
+</Mod>

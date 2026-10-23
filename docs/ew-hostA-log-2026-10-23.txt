@@ -1,0 +1,139 @@
+setup spawn 227,-79 -> test spot 227,-639	
+setup held item 142 data/entities/player.xml holstered=false	
+START frame=180 player pinned at 227,-639	
+EW peer present after 814 frames	
+EW role=host	
+EW host heartbeat frame=1053 peers at -40,0 sheep=0 prey=2 projectiles<400px=0 fervour_circles=0 fi_fields=0	
+EW host heartbeat frame=1113 peers at -40,0 sheep=0 prey=2 projectiles<400px=0 fervour_circles=0 fi_fields=0	
+EW host heartbeat frame=1173 peers at -40,0 sheep=0 prey=2 projectiles<400px=0 fervour_circles=0 fi_fields=0	
+equip imbue_freeze_field held_ok=true cards=3	
+EW host freeze field rel=-8,-12	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host heartbeat frame=1271 peers at -40,0 sheep=2 prey=4 projectiles<400px=1 fervour_circles=1 fi_fields=1	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host heartbeat frame=1331 peers at -40,0 sheep=2 prey=4 projectiles<400px=1 fervour_circles=1 fi_fields=1	
+equip bolt held_ok=true cards=1	
+EW host before bolt frame=1366 mana=10000 shots=1 nextUsable=1256 reloadNext=0 ctrl.enabled=false down=false bframe=1211 requireTrigger=false hidden=0	
+EW host bolt fired, aim=-264,-166 wanted=102,-8	
+EW host field rel=-8,-12 payload=freeze	
+EW host imbued projectile data/entities/projectiles/deck/light_bullet.xml rel=-187,-114 effects=data/entities/misc/effect_frozen.xml,	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host heartbeat frame=1429 peers at -40,0 sheep=2 prey=4 projectiles<400px=1 fervour_circles=1 fi_fields=1	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host heartbeat frame=1489 peers at -40,0 sheep=2 prey=4 projectiles<400px=1 fervour_circles=1 fi_fields=1	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=freeze	
+EW host sheep rel=7,-12 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+EW host sheep rel=102,-12 BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host heartbeat frame=1549 peers at -40,0 sheep=2 prey=4 projectiles<400px=1 fervour_circles=1 fi_fields=1	
+equip imbue_burn_field held_ok=true cards=3	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=39.680 burning=true fireframes=700	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=39.653 burning=true fireframes=700	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=39.067 burning=true fireframes=680	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=39.120 burning=true fireframes=680	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=38.560 burning=true fireframes=660	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=38.560 burning=true fireframes=660	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host heartbeat frame=1647 peers at -40,0 sheep=4 prey=6 projectiles<400px=1 fervour_circles=1 fi_fields=1	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=38.000 burning=true fireframes=640	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=38.000 burning=true fireframes=640	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=37.360 burning=true fireframes=620	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=37.467 burning=true fireframes=620	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=37.067 burning=true fireframes=600	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=36.880 burning=true fireframes=600	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host heartbeat frame=1707 peers at -40,0 sheep=4 prey=6 projectiles<400px=1 fervour_circles=1 fi_fields=1	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=36.320 burning=true fireframes=580	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=36.320 burning=true fireframes=580	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=35.813 burning=true fireframes=560	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=35.760 burning=true fireframes=560	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=35.280 burning=true fireframes=540	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=35.493 burning=true fireframes=540	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host heartbeat frame=1767 peers at -40,0 sheep=4 prey=6 projectiles<400px=1 fervour_circles=1 fi_fields=1	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=34.960 burning=true fireframes=520	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=34.853 burning=true fireframes=520	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=39.680 burning=true fireframes=699	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=34.320 burning=true fireframes=500	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=34.347 burning=true fireframes=500	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=39.093 burning=true fireframes=679	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=33.760 burning=true fireframes=480	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=33.760 burning=true fireframes=480	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=38.533 burning=true fireframes=659	
+EW host heartbeat frame=1827 peers at -40,0 sheep=4 prey=6 projectiles<400px=1 fervour_circles=1 fi_fields=1	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=33.253 burning=true fireframes=460	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=33.200 burning=true fireframes=460	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=39.653 burning=true fireframes=699	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=37.893 burning=true fireframes=639	
+EW host field rel=-8,-12 payload=fire	
+EW host sheep rel=10,-12 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=32.693 burning=true fireframes=440	
+EW host sheep rel=-8,6 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=32.587 burning=true fireframes=440	
+EW host sheep rel=-8,-30 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=39.120 burning=true fireframes=679	
+EW host sheep rel=14,-2 BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=37.573 burning=true fireframes=619	

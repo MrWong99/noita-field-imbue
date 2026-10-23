@@ -1,0 +1,71 @@
+setup spawn 227,-79 -> test spot 227,-579	
+setup held item 167 data/entities/player.xml holstered=false	
+START frame=180 player pinned at 227,-579	
+CAL starting-wand before hold frame=180 mana=111 shots=0 nextUsable=0 reloadNext=0 ctrl.enabled=false down=false bframe=0 requireTrigger=false hidden=0	
+CAL starting-wand after hold frame=183 mana=107 shots=1 nextUsable=198 reloadNext=0 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand hold shot_counter_up=true	
+CAL starting-wand before force frame=223 mana=111 shots=1 nextUsable=198 reloadNext=0 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand after force frame=227 mana=107 shots=2 nextUsable=241 reloadNext=248 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand force shot_counter_up=true	
+equip bolt held_ok=true cards=1	
+CAL before hold frame=272 mana=10000 shots=2 nextUsable=241 reloadNext=248 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL after hold frame=275 mana=10000 shots=3 nextUsable=308 reloadNext=248 ctrl.enabled=false down=false bframe=275 requireTrigger=false hidden=0	
+CAL hold shot_counter_up=true bolt_found=true	
+CAL using fire mode hold	
+SUITE prototype, field_imbue enabled=true	
+equip imbue_freeze_field held_ok=true cards=3	
+P6 t=5 player-herd sheep FROZEN=0 | normal sheep FROZEN=1	
+P6 t=140 player-herd sheep FROZEN=0 | normal sheep FROZEN=0	
+P6 t=200 player-herd sheep FROZEN=0 | normal sheep FROZEN=1	
+P6 t=260 player-herd sheep FROZEN=0 | normal sheep FROZEN=1	
+equip imbue_freeze_field held_ok=true cards=3	
+equip fast_bolt held_ok=true cards=4	
+P7 fast-bolt launch speed 0.0deg |v|=1000 state: effects= ice=0.00 converters=0 fi_seen=nil	
+P7 fast-bolt past the field x=+125 state: effects=data/entities/misc/effect_frozen.xml, ice=0.20 converters=2 fi_seen=,585,	
+equip imbue_freeze_field held_ok=true cards=3	
+P8 cloud alive=true fi_seen=nil converters=0	
+equip imbue_freeze_field held_ok=true cards=3	
+equip freeze_bolt held_ok=true cards=2	
+P9 freeze-bolt launch speed 0.2deg |v|=784 state: effects=data/entities/misc/effect_frozen.xml, ice=0.20 converters=2 fi_seen=nil	
+P9 freeze-bolt past the field x=+130 state: effects=data/entities/misc/effect_frozen.xml, ice=0.20 converters=2 fi_seen=,604,	
+equip imbue_burn_field held_ok=true cards=3	
+P1 t=2 burning sheep 2/4	
+P1 t=5 burning sheep 2/4	
+P1 t=62 burning sheep 3/4	
+P1 t=122 burning sheep 3/4	
+P1 t=182 burning sheep 3/4	
+P1 t=242 burning sheep 3/4	
+P1 field lua mods/field_imbue/files/scripts/field_tick.lua enabled=true	
+P1 field lua mods/field_imbue/files/scripts/field_reapply.lua enabled=true	
+P1 field fi_payload=fire fi_seen=nil tags=projectile_player,projectile,player_projectile,fi_field	
+equip imbue_freeze_field held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+P2 imbue-freeze trace t=3 bolt rel=+61,-5 1.0deg |v|=736	
+P2 imbue-freeze trace t=6 bolt rel=+95,-4 1.8deg |v|=675	
+P2 imbue-freeze trace t=9 bolt rel=+127,-3 2.6deg |v|=620	
+P2 imbue-freeze bolt after field: damage_game_effect_entities=data/entities/misc/effect_frozen.xml, ice=0.20 emitters=5 converters=2 fi_seen=,630,	
+P2 imbue-freeze t=10 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P2 imbue-freeze trace t=12 bolt rel=+157,-2 3.6deg |v|=569	
+P2 imbue-freeze t=20 target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=38.880 burning=false fireframes=0 | FROZEN=1	
+P2 imbue-freeze t=30 target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=38.880 burning=false fireframes=0 | FROZEN=1	
+P2 imbue-freeze t=40 target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=38.880 burning=false fireframes=0 | FROZEN=1	
+equip freeze_field held_ok=true cards=2	
+equip bolt held_ok=true cards=1	
+P3 control-freeze trace t=3 bolt rel=+62,-5 0.9deg |v|=753	
+P3 control-freeze trace t=6 bolt rel=+97,-4 1.7deg |v|=691	
+P3 control-freeze trace t=9 bolt rel=+130,-3 2.6deg |v|=634	
+P3 control-freeze bolt after field: damage_game_effect_entities= ice=0.00 emitters=3 converters=0 fi_seen=nil	
+P3 control-freeze t=10 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P3 control-freeze trace t=12 bolt rel=+160,-2 3.5deg |v|=582	
+P3 control-freeze t=20 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=39.880 burning=false fireframes=0 | FROZEN=0	
+P3 control-freeze t=30 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=39.880 burning=false fireframes=0 | FROZEN=0	
+P3 control-freeze t=40 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=39.880 burning=false fireframes=0 | FROZEN=0	
+equip imbue_bolt held_ok=true cards=2	
+P4 bolt fi_payload=nil fi_seen=nil tags=teleportable_NOT,projectile_player,projectile,player_projectile	
+equip imbue_burn_field held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+P5 imbue-fire t=10 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0 | ON_FIRE=0	
+P5 imbue-fire t=20 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0 | ON_FIRE=0	
+P5 imbue-fire t=30 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0 | ON_FIRE=0	
+P5 imbue-fire t=40 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0 | ON_FIRE=0	
+DONE frame=1593	

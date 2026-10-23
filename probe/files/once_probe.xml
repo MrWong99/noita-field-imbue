@@ -1,0 +1,3 @@
+<Entity>
+  <LuaComponent script_source_file="mods/field_imbue_probe/files/once_probe.lua" execute_every_n_frame="1" remove_after_executed="1" />
+</Entity>

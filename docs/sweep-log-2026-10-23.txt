@@ -1,0 +1,414 @@
+setup spawn 227,-79 -> test spot 227,-579	
+setup held item 159 data/entities/player.xml holstered=false	
+START frame=180 player pinned at 227,-579	
+CAL starting-wand before hold frame=180 mana=89 shots=0 nextUsable=0 reloadNext=0 ctrl.enabled=false down=false bframe=0 requireTrigger=false hidden=0	
+CAL starting-wand after hold frame=183 mana=85 shots=1 nextUsable=200 reloadNext=208 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand hold shot_counter_up=true	
+CAL starting-wand before force frame=223 mana=89 shots=1 nextUsable=200 reloadNext=208 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand after force frame=227 mana=85 shots=2 nextUsable=243 reloadNext=251 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand force shot_counter_up=true	
+equip bolt held_ok=true cards=1	
+CAL before hold frame=272 mana=10000 shots=2 nextUsable=243 reloadNext=251 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL after hold frame=275 mana=10000 shots=3 nextUsable=308 reloadNext=251 ctrl.enabled=false down=false bframe=275 requireTrigger=false hidden=0	
+CAL hold shot_counter_up=true bolt_found=true	
+CAL using fire mode hold	
+SUITE sweep, field_imbue enabled=true	
+equip plain_field held_ok=true cards=1	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ACCELERATING_SHOT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ACID_TRAIL payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ANTI_HOMING payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ARC_ELECTRIC payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ARC_FIRE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ARC_GUNPOWDER payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ARC_POISON payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP AREA_DAMAGE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP AUTOAIM payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP AVOIDING_ARC payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP BLOODLUST payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP BLOOD_TO_ACID payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP BOUNCE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP BOUNCE_EXPLOSION payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP BOUNCE_HOLE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP BOUNCE_LARPA payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP BOUNCE_LASER payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP BOUNCE_LASER_EMITTER payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP BOUNCE_LIGHTNING payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP BOUNCE_SMALL_EXPLOSION payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP BOUNCE_SPARK payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP BURN_TRAIL payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP CHAIN_SHOT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP CHAOTIC_ARC payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP CLIPPING_SHOT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP CLUSTERMOD payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP COLOUR_BLUE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP COLOUR_GREEN payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP COLOUR_INVIS payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP COLOUR_ORANGE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP COLOUR_PURPLE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP COLOUR_RAINBOW payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP COLOUR_RED payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP COLOUR_YELLOW payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP CRITICAL_HIT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP CRUMBLING_EARTH_PROJECTILE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP CURSE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP CURSE_WITHER_ELECTRICITY payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP CURSE_WITHER_EXPLOSION payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP CURSE_WITHER_MELEE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP CURSE_WITHER_PROJECTILE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP DAMAGE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP DAMAGE_FOREVER payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP DECELERATING_SHOT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ELECTRIC_CHARGE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ENERGY_SHIELD_SHOT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ESSENCE_TO_POWER payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP EXPLOSION_REMOVE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP EXPLOSION_TINY payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP EXPLOSIVE_PROJECTILE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP FIREBALL_RAY payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP FIREBALL_RAY_ENEMY payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP FIREBALL_RAY_LINE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP FIRE_TRAIL payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP FIZZLE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP FLOATING_ARC payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP FLY_DOWNWARDS payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP FLY_UPWARDS payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP FREEZE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP GRAVITY payload=true centre=clean bolt_imbued=false	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP GRAVITY_ANTI payload=true centre=clean bolt_imbued=false	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP GRAVITY_FIELD_ENEMY payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP GUNPOWDER_TRAIL payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HEAVY_SHOT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HITFX_BURNING_CRITICAL_HIT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HITFX_CRITICAL_BLOOD payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HITFX_CRITICAL_OIL payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HITFX_CRITICAL_WATER payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HITFX_EXPLOSION_ALCOHOL payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HITFX_EXPLOSION_ALCOHOL_GIGA payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HITFX_EXPLOSION_SLIME payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HITFX_EXPLOSION_SLIME_GIGA payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HITFX_PETRIFY payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HITFX_TOXIC_CHARM payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HOMING payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HOMING_ACCELERATING payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HOMING_AREA payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HOMING_CURSOR payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HOMING_ROTATE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HOMING_SHOOTER payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HOMING_SHORT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HOMING_WAND payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP HORIZONTAL_ARC payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP KNOCKBACK payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LARPA_CHAOS payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LARPA_CHAOS_2 payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LARPA_DEATH payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LARPA_DOWNWARDS payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LARPA_UPWARDS payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LASER_EMITTER_RAY payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LASER_EMITTER_WIDER payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LAVA_TO_BLOOD payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LIFETIME payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LIFETIME_DOWN payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LIGHT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LIGHTNING_RAY payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LIGHTNING_RAY_ENEMY payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LIGHT_SHOT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LINE_ARC payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP LIQUID_TO_EXPLOSION payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP MATTER_EATER payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP NECROMANCY payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP NOLLA payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP OIL_TRAIL payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ORBIT_DISCS payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ORBIT_FIREBALLS payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ORBIT_LARPA payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ORBIT_LASERS payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ORBIT_SHOT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP PHASING_ARC payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP PIERCING_SHOT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP PINGPONG_PATH payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP POISON_TRAIL payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP QUANTUM_SPLIT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP RAINBOW_TRAIL payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP RANDOM_EXPLOSION payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP REMOVE_BOUNCE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ROCKET_DOWNWARDS payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ROCKET_OCTAGON payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP SINEWAVE payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP SPEED payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP SPELLS_TO_POWER payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP SPIRALING_SHOT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP STATIC_TO_SAND payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP TENTACLE_RAY payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP TENTACLE_RAY_ENEMY payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP TOXIC_TO_ACID payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP TRANSMUTATION payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP TRUE_ORBIT payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP WATER_TO_POISON payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP WATER_TRAIL payload=true centre=clean bolt_imbued=true	
+equip sweep held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+SWEEP ZERO_DAMAGE payload=true centre=clean bolt_imbued=true	
+SWEEP summary: 132 modifiers, payload 132, clean centre 132, bolt imbued 130	
+DONE frame=12736	

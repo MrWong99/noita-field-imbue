@@ -1,0 +1,273 @@
+setup spawn 227,-79 -> test spot 227,-579	
+setup held item 193 data/entities/player.xml holstered=false	
+START frame=180 player pinned at 227,-579	
+CAL starting-wand before hold frame=180 mana=118 shots=0 nextUsable=0 reloadNext=0 ctrl.enabled=false down=false bframe=0 requireTrigger=false hidden=0	
+CAL starting-wand after hold frame=183 mana=114 shots=1 nextUsable=200 reloadNext=0 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand hold shot_counter_up=true	
+CAL starting-wand before force frame=223 mana=118 shots=1 nextUsable=200 reloadNext=0 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand after force frame=227 mana=114 shots=2 nextUsable=243 reloadNext=249 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand force shot_counter_up=true	
+equip bolt held_ok=true cards=1	
+CAL before hold frame=272 mana=10000 shots=2 nextUsable=243 reloadNext=249 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL after hold frame=275 mana=10000 shots=3 nextUsable=308 reloadNext=249 ctrl.enabled=false down=false bframe=275 requireTrigger=false hidden=0	
+CAL hold shot_counter_up=true bolt_found=true	
+CAL using fire mode hold	
+equip field held_ok=true cards=1	
+T1 field field at 347,-579 4 sheep at 18px	
+T1 field t=5 sheep1: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 field t=5 sheep2: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 field t=5 sheep3: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 field t=5 sheep4: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 field t=5 player: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=4.000 burning=false fireframes=0	
+T1 field t=40 sheep1: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 field t=40 sheep2: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 field t=40 sheep3: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 field t=40 sheep4: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 field t=40 player: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=4.000 burning=false fireframes=0	
+T1 field t=120 sheep1: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 field t=120 sheep2: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 field t=120 sheep3: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 field t=120 sheep4: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 field t=120 player: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=4.000 burning=false fireframes=0	
+T1 field file data/entities/projectiles/deck/berserk_field.xml tags projectile_player,projectile,player_projectile	
+T1 field pc.damage_game_effect_entities=data/entities/misc/effect_berserk.xml,	
+T1 field config.game_effect_entities=	
+T1 field config.extra_entities=	
+T1 field pc.friendly_fire=false pc.damage=0	
+T1 field gaec.game_effect_entitities n=0 	
+T1 field gaec.radius=28 frame_length=-1	
+T1 field components: AudioComponent,AudioLoopComponent,GameAreaEffectComponent,LifetimeComponent,ParticleEmitterComponent,ParticleEmitterComponent,ProjectileComponent,SpriteComponent,SpriteParticleEmitterComponent,VelocityComponent	
+T1 field children=0	
+equip freeze_field held_ok=true cards=2	
+T1 freeze_field field at 347,-579 4 sheep at 18px	
+T1 freeze_field t=5 sheep1: BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+T1 freeze_field t=5 sheep2: BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+T1 freeze_field t=5 sheep3: BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+T1 freeze_field t=5 sheep4: BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+T1 freeze_field t=5 player: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=4.000 burning=false fireframes=0	
+T1 freeze_field t=40 sheep1: BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+T1 freeze_field t=40 sheep2: BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+T1 freeze_field t=40 sheep3: BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+T1 freeze_field t=40 sheep4: BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+T1 freeze_field t=40 player: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=4.000 burning=false fireframes=0	
+T1 freeze_field t=120 sheep1: BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+T1 freeze_field t=120 sheep2: BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+T1 freeze_field t=120 sheep3: BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+T1 freeze_field t=120 sheep4: BERSERK=1 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.800 burning=false fireframes=0	
+T1 freeze_field t=120 player: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=4.000 burning=false fireframes=0	
+T1 freeze_field file data/entities/projectiles/deck/berserk_field.xml tags projectile_player,projectile,player_projectile	
+T1 freeze_field pc.damage_game_effect_entities=data/entities/misc/effect_berserk.xml,data/entities/misc/effect_frozen.xml,	
+T1 freeze_field config.game_effect_entities=data/entities/misc/effect_frozen.xml,	
+T1 freeze_field config.extra_entities=data/entities/particles/freeze_charge.xml,	
+T1 freeze_field pc.friendly_fire=false pc.damage=0	
+T1 freeze_field gaec.game_effect_entitities n=0 	
+T1 freeze_field gaec.radius=28 frame_length=-1	
+T1 freeze_field components: AudioComponent,AudioLoopComponent,GameAreaEffectComponent,LifetimeComponent,MagicConvertMaterialComponent,MagicConvertMaterialComponent,ParticleEmitterComponent,ParticleEmitterComponent,ParticleEmitterComponent,ParticleEmitterComponent,ProjectileComponent,SpriteComponent,SpriteParticleEmitterComponent,SpriteParticleEmitterComponent,VelocityComponent	
+T1 freeze_field children=0	
+equip burn_field held_ok=true cards=2	
+T1 burn_field field at 347,-579 4 sheep at 18px	
+T1 burn_field t=5 sheep1: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 burn_field t=5 sheep2: BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=39.973 burning=true fireframes=715	
+T1 burn_field t=5 sheep3: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 burn_field t=5 sheep4: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 burn_field t=5 player: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=4.000 burning=false fireframes=0	
+T1 burn_field t=40 sheep1: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 burn_field t=40 sheep2: BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=39.093 burning=true fireframes=680	
+T1 burn_field t=40 sheep3: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 burn_field t=40 sheep4: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 burn_field t=40 player: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=4.000 burning=false fireframes=0	
+T1 burn_field t=120 sheep1: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 burn_field t=120 sheep2: BERSERK=1 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 hp=36.880 burning=true fireframes=600	
+T1 burn_field t=120 sheep3: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 burn_field t=120 sheep4: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 burn_field t=120 player: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=4.000 burning=false fireframes=0	
+T1 burn_field file data/entities/projectiles/deck/berserk_field.xml tags projectile_player,projectile,player_projectile	
+T1 burn_field pc.damage_game_effect_entities=data/entities/misc/effect_berserk.xml,data/entities/misc/effect_apply_on_fire.xml,	
+T1 burn_field config.game_effect_entities=data/entities/misc/effect_apply_on_fire.xml,	
+T1 burn_field config.extra_entities=data/entities/misc/burn.xml,	
+T1 burn_field pc.friendly_fire=false pc.damage=0	
+T1 burn_field gaec.game_effect_entitities n=0 	
+T1 burn_field gaec.radius=28 frame_length=-1	
+T1 burn_field components: AudioComponent,AudioLoopComponent,GameAreaEffectComponent,LifetimeComponent,ParticleEmitterComponent,ParticleEmitterComponent,ParticleEmitterComponent,ParticleEmitterComponent,ProjectileComponent,SpriteComponent,SpriteParticleEmitterComponent,VelocityComponent	
+T1 burn_field children=0	
+equip pierce_field held_ok=true cards=2	
+T1 pierce_field field at 232,-597 4 sheep at 18px	
+T1 pierce_field t=5 sheep1: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 pierce_field t=5 sheep2: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 pierce_field t=5 sheep3: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 pierce_field t=5 sheep4: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 pierce_field t=5 player: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=4.000 burning=false fireframes=0	
+T1 pierce_field t=40 sheep1: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 pierce_field t=40 sheep2: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 pierce_field t=40 sheep3: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 pierce_field t=40 sheep4: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 pierce_field t=40 player: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=4.000 burning=false fireframes=0	
+T1 pierce_field t=120 sheep1: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 pierce_field t=120 sheep2: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 pierce_field t=120 sheep3: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 pierce_field t=120 sheep4: BERSERK=1 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T1 pierce_field t=120 player: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=4.000 burning=false fireframes=0	
+T1 pierce_field file data/entities/projectiles/deck/berserk_field.xml tags projectile_player,projectile,player_projectile	
+T1 pierce_field pc.damage_game_effect_entities=data/entities/misc/effect_berserk.xml,	
+T1 pierce_field config.game_effect_entities=	
+T1 pierce_field config.extra_entities=data/entities/misc/piercing_shot.xml,	
+T1 pierce_field pc.friendly_fire=true pc.damage=-0.60000002384186	
+T1 pierce_field gaec.game_effect_entitities n=0 	
+T1 pierce_field gaec.radius=28 frame_length=-1	
+T1 pierce_field components: AudioComponent,AudioLoopComponent,GameAreaEffectComponent,LifetimeComponent,ParticleEmitterComponent,ParticleEmitterComponent,ProjectileComponent,SpriteComponent,SpriteParticleEmitterComponent,VelocityComponent	
+T1 pierce_field children=0	
+equip burn_bolt held_ok=true cards=2	
+T2 burn_bolt file data/entities/projectiles/deck/light_bullet.xml tags teleportable_NOT,projectile_player,projectile,player_projectile	
+T2 burn_bolt pc.damage_game_effect_entities=data/entities/misc/effect_apply_on_fire.xml,	
+T2 burn_bolt config.game_effect_entities=data/entities/misc/effect_apply_on_fire.xml,	
+T2 burn_bolt config.extra_entities=data/entities/misc/burn.xml,	
+T2 burn_bolt pc.friendly_fire=false pc.damage=0.11999999731779	
+T2 burn_bolt components: AudioComponent,AudioComponent,LightComponent,ParticleEmitterComponent,ParticleEmitterComponent,ParticleEmitterComponent,ParticleEmitterComponent,ParticleEmitterComponent,ProjectileComponent,SpriteComponent,VariableStorageComponent,VelocityComponent	
+T2 burn_bolt vsc projectile_file data/entities/projectiles/deck/light_bullet.xml	
+T2 burn_bolt children=0	
+equip bolt held_ok=true cards=1	
+T2 homing imbue=false t=2 0.5deg |v|=729 pos=29,-18	
+T2 homing imbue=false t=4 1.0deg |v|=688 pos=52,-18	
+T2 homing imbue=false t=6 1.6deg |v|=650 pos=74,-17	
+T2 homing imbue=false t=8 2.2deg |v|=614 pos=95,-16	
+T2 homing imbue=false t=10 2.8deg |v|=580 pos=115,-15	
+T2 homing imbue=false t=12 3.5deg |v|=548 pos=133,-14	
+T2 homing imbue=false t=14 4.2deg |v|=517 pos=151,-13	
+T2 homing imbue=false t=16 4.9deg |v|=489 pos=167,-12	
+T2 homing imbue=false t=18 5.7deg |v|=462 pos=183,-10	
+T2 homing imbue=false t=20 6.6deg |v|=437 pos=197,-9	
+T2 homing imbue=false t=22 7.4deg |v|=414 pos=211,-7	
+T2 homing imbue=false t=24 8.4deg |v|=391 pos=224,-5	
+T2 homing imbue=false t=26 9.3deg |v|=370 pos=237,-3	
+T2 homing imbue=false t=28 10.4deg |v|=351 pos=248,-1	
+T2 homing imbue=false t=30 11.5deg |v|=332 pos=259,1	
+equip bolt held_ok=true cards=1	
+T2 homing imbue=true t=2 0.5deg |v|=784 pos=31,-18	
+T2 homing loaded homing.xml at t=4, HomingComponents=1	
+T2 homing imbue=true t=4 1.0deg |v|=740 pos=56,-18	
+T2 homing imbue=true t=6 -2.2deg |v|=610 pos=77,-18	
+T2 homing imbue=true t=8 -7.1deg |v|=548 pos=96,-20	
+T2 homing imbue=true t=10 -12.8deg |v|=516 pos=113,-23	
+T2 homing imbue=true t=12 -18.3deg |v|=493 pos=129,-28	
+T2 homing imbue=true t=14 -23.5deg |v|=461 pos=143,-34	
+T2 homing imbue=true t=16 -28.6deg |v|=414 pos=156,-41	
+T2 homing imbue=true t=18 -33.8deg |v|=349 pos=166,-47	
+T2 homing imbue=true t=20 -39.9deg |v|=270 pos=174,-53	
+T2 homing imbue=true t=22 -48.1deg |v|=187 pos=179,-58	
+T2 homing imbue=true t=24 -61.9deg |v|=112 pos=181,-62	
+T2 homing imbue=true t=26 -93.5deg |v|=59 pos=181,-64	
+T2 homing imbue=true t=28 -150.9deg |v|=49 pos=180,-65	
+T2 homing imbue=true t=30 176.8deg |v|=65 pos=178,-65	
+equip bolt held_ok=true cards=1	
+T2 freeze imbue=false t=5 bolt_alive=true sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T2 freeze imbue=false t=10 bolt_alive=false sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=39.880 burning=false fireframes=0	
+T2 freeze imbue=false t=15 bolt_alive=false sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=39.880 burning=false fireframes=0	
+T2 freeze imbue=false t=20 bolt_alive=false sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=39.880 burning=false fireframes=0	
+T2 freeze imbue=false t=25 bolt_alive=false sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=39.880 burning=false fireframes=0	
+T2 freeze imbue=false t=30 bolt_alive=false sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=39.880 burning=false fireframes=0	
+T2 freeze imbue=false t=35 bolt_alive=false sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=39.880 burning=false fireframes=0	
+T2 freeze imbue=false t=40 bolt_alive=false sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=39.880 burning=false fireframes=0	
+equip bolt held_ok=true cards=1	
+T2 freeze appended effect_frozen at t=2, now: data/entities/misc/effect_frozen.xml,	
+T2 freeze imbue=true t=5 bolt_alive=true sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 hp=40.000 burning=false fireframes=0	
+T2 freeze imbue=true t=10 bolt_alive=false sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.400 burning=false fireframes=0	
+T2 freeze imbue=true t=15 bolt_alive=false sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.400 burning=false fireframes=0	
+T2 freeze imbue=true t=20 bolt_alive=false sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.400 burning=false fireframes=0	
+T2 freeze imbue=true t=25 bolt_alive=false sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.400 burning=false fireframes=0	
+T2 freeze imbue=true t=30 bolt_alive=false sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.400 burning=false fireframes=0	
+T2 freeze imbue=true t=35 bolt_alive=false sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.400 burning=false fireframes=0	
+T2 freeze imbue=true t=40 bolt_alive=false sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 hp=39.400 burning=false fireframes=0	
+T3 execute_on_added via EntityLoadToEntity ran=1	
+T3 execute_on_added via EntityLoad (control) ran=1	
+T3 every_n_frame=1+remove_after_executed via EntityLoadToEntity ran=1 lua_left=0	
+equip conv_field held_ok=true cards=2	
+T4 conv_field t=0 #1 en=true loop=false kill=false radius=32 mRadius=3 ; #2 en=true loop=false kill=false radius=32 mRadius=3 ; #3 en=true loop=false kill=false radius=32 mRadius=3 ; #4 en=true loop=false kill=false radius=32 mRadius=3 ; #5 en=true loop=false kill=false radius=32 mRadius=3 ; #6 en=true loop=false kill=false radius=32 mRadius=3	
+T4 conv_field t=10 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=20 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=30 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=40 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=50 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=60 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=70 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=80 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=90 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=100 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=110 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=120 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=130 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=140 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=150 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=160 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=170 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=180 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=190 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=200 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=210 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=220 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=230 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=240 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=250 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=260 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=270 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=280 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=290 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+T4 conv_field t=300 #1 en=true loop=false kill=false radius=32 mRadius=30 ; #2 en=true loop=false kill=false radius=32 mRadius=30 ; #3 en=true loop=false kill=false radius=32 mRadius=30 ; #4 en=true loop=false kill=false radius=32 mRadius=30 ; #5 en=true loop=false kill=false radius=32 mRadius=30 ; #6 en=true loop=false kill=false radius=32 mRadius=30	
+equip conv2_field held_ok=true cards=2	
+T4 conv2_field t=0 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=10 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=20 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=30 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=40 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=50 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=60 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=70 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=80 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=90 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=100 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=110 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=120 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=130 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=140 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=150 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=160 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=170 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=180 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=190 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=200 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=210 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=220 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=230 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=240 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=250 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=260 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=270 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=280 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=290 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+T4 conv2_field t=300 #1 en=true loop=true kill=false radius=48 mRadius=0 ; #2 en=true loop=true kill=false radius=48 mRadius=0	
+equip marker_bolt held_ok=true cards=2	
+T5 marker_bolt file data/entities/projectiles/deck/light_bullet.xml tags teleportable_NOT,projectile_player,projectile,player_projectile	
+T5 marker_bolt pc.damage_game_effect_entities=	
+T5 marker_bolt config.game_effect_entities=	
+T5 marker_bolt config.extra_entities=mods/field_imbue_probe/files/marker.xml,	
+T5 marker_bolt pc.friendly_fire=false pc.damage=0.11999999731779	
+T5 marker_bolt components: AudioComponent,AudioComponent,LightComponent,ParticleEmitterComponent,ParticleEmitterComponent,ParticleEmitterComponent,ProjectileComponent,SpriteComponent,VariableStorageComponent,VariableStorageComponent,VelocityComponent	
+T5 marker_bolt vsc projectile_file data/entities/projectiles/deck/light_bullet.xml	
+T5 marker_bolt vsc fi_mod FI_PROBE_MARKER	
+T5 marker_bolt children=0	
+equip marker_field held_ok=true cards=2	
+T5 marker_field file data/entities/projectiles/deck/berserk_field.xml tags projectile_player,projectile,player_projectile	
+T5 marker_field pc.damage_game_effect_entities=data/entities/misc/effect_berserk.xml,	
+T5 marker_field config.game_effect_entities=	
+T5 marker_field config.extra_entities=mods/field_imbue_probe/files/marker.xml,	
+T5 marker_field pc.friendly_fire=false pc.damage=0	
+T5 marker_field gaec.game_effect_entitities n=0 	
+T5 marker_field gaec.radius=28 frame_length=-1	
+T5 marker_field components: AudioComponent,AudioLoopComponent,GameAreaEffectComponent,LifetimeComponent,ParticleEmitterComponent,ParticleEmitterComponent,ProjectileComponent,SpriteComponent,SpriteParticleEmitterComponent,VariableStorageComponent,VelocityComponent	
+T5 marker_field vsc fi_mod FI_PROBE_MARKER	
+T5 marker_field children=0	
+equip marker_fire held_ok=true cards=2	
+T5 marker_fire file data/entities/projectiles/deck/circle_fire.xml tags projectile_player	
+T5 marker_fire no ProjectileComponent	
+T5 marker_fire components: AudioComponent,LifetimeComponent,ParticleEmitterComponent	
+T5 marker_fire children=0	
+DONE frame=1873	
