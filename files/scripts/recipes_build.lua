@@ -225,6 +225,9 @@ for id in pairs(recipes) do
 	count = count + 1
 	ModTextFileSetContent(GEN .. "mod/" .. id .. ".xml",
 		('<Entity><VariableStorageComponent _tags="fi_mod" name="fi_mod" value_string="%s" /></Entity>'):format(id))
+	-- Sign Flip (another mod) can flip a modifier in the cast; gun_append.lua then marks the field with this one
+	ModTextFileSetContent(GEN .. "mod/" .. id .. ".neg.xml",
+		('<Entity><VariableStorageComponent _tags="fi_mod" name="fi_mod" value_string="-%s" /></Entity>'):format(id))
 end
 ModTextFileSetContent(GEN .. "recipes.lua", "return " .. serialize(recipes) .. "\n")
 ModTextFileSetContent(GEN .. "skipped.lua", "return " .. serialize(skipped) .. "\n")

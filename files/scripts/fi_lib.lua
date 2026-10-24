@@ -36,6 +36,97 @@ function M.recipes()
 	return recipes
 end
 
+-- Sign Flip (another mod) can flip a modifier in a cast; the field then carries "-<ID>" (files/gun_append.lua). Its
+-- recipe adds the numbers the other way round and inverts the speed factor. Negative damage does nothing in the
+-- engine, so damage it would take away heals instead. What the modifier adds becomes its opposite from Sign Flip's
+-- table (its files/scripts/opposites_build.lua): Homing steers away, converters run backwards, a trail eats its
+-- material (on bolts and over the field) and drops its on-hit effect. Same rules as Sign Flip applies in the cast.
+local HEAL_INSTEAD = { damage_projectile_add = true, damage_melee_add = true, damage_electricity_add = true,
+	damage_fire_add = true, damage_ice_add = true, damage_slice_add = true, damage_curse_add = true, damage_drill_add = true }
+
+local sf_opposites
+local function opposites()
+	if sf_opposites == nil then
+		local ok, o = pcall(dofile_once, "mods/sign_flip/files/gen/opposites.lua")
+		sf_opposites = ok and type(o) == "table" and o or false
+	end
+	return sf_opposites
+end
+
+-- the negated recipe, and whether it differs from the plain one at all
+local function negate(r)
+	local n, different = {}, false
+	for k, v in pairs(r) do
+		n[k] = v
+	end
+	n.add, n.negated = {}, true
+	for k, v in pairs(r.add or {}) do
+		if HEAL_INSTEAD[k] and v > 0 then
+			k = "damage_healing_add"
+		end
+		n.add[k] = (n.add[k] or 0) - v
+		different = true
+	end
+	if r.speed and r.speed ~= 0 and r.speed ~= 1 then
+		n.speed = 1 / r.speed
+		different = true
+	end
+	local O = opposites()
+	if O then
+		local drop = false
+		n.extra_entities, n.converters = {}, {}
+		for _, f in ipairs(r.extra_entities or {}) do
+			local to = O.extra[f]
+			if to then
+				different = true
+				if O.drops_effects[f] then -- a poured material became an eater: it works over the field too
+					drop = true
+					n.converters[#n.converters + 1] = to
+				end
+			end
+			n.extra_entities[#n.extra_entities + 1] = to or f
+		end
+		for _, f in ipairs(r.converters or {}) do
+			n.converters[#n.converters + 1] = O.extra[f] or f
+		end
+		local eaters = {}
+		for _, m in ipairs(r.trail_material or {}) do
+			eaters[#eaters + 1] = O.eat[m]
+		end
+		if #eaters > 0 then
+			n.trail_material, n.trail_amount = nil, nil
+			for _, e in ipairs(eaters) do
+				n.extra_entities[#n.extra_entities + 1] = e
+				n.converters[#n.converters + 1] = e
+			end
+			different, drop = true, true
+		end
+		if drop then
+			n.game_effect_entities, n.effects = {}, {}
+		end
+	end
+	return n, different
+end
+
+-- the recipe for a payload id, "-<ID>" included (a negation that changes nothing is the plain recipe)
+local negated = {}
+function M.recipe(id)
+	local R = M.recipes()
+	if id:sub(1, 1) ~= "-" then
+		return R[id]
+	end
+	if negated[id] == nil then
+		local r = R[id:sub(2)]
+		if r then
+			local n, different = negate(r)
+			negated[id] = different and n or r
+		else
+			negated[id] = false
+		end
+	end
+	return negated[id] or nil
+end
+
 -- state lives in VariableStorageComponents tagged with their own name (cheap lookup by tag)
 local function vsc(e, name)
 	return EntityGetFirstComponentIncludingDisabled(e, "VariableStorageComponent", name)
@@ -77,9 +168,9 @@ end
 
 -- the field's modifier ids, ignoring anything without a recipe (e.g. an old save after a mod was removed)
 function M.payload(e)
-	local R, out = M.recipes(), {}
+	local out = {}
 	for id in (M.get_str(e, "fi_payload", "") or ""):gmatch("[^,]+") do
-		if R[id] then
+		if M.recipe(id) then
 			out[#out + 1] = id
 		end
 	end
@@ -88,10 +179,14 @@ end
 
 -- which modifiers were cast with this field: files/gun_append.lua merged one marker per modifier onto it
 function M.payload_from_markers(e)
-	local R, out, seen = M.recipes(), {}, {}
+	local out, seen = {}, {}
 	for _, v in ipairs(EntityGetComponentIncludingDisabled(e, "VariableStorageComponent", "fi_mod") or {}) do
 		local id = ComponentGetValue2(v, "value_string")
-		if R[id] and not seen[id] then
+		local r = M.recipe(id)
+		if r and not r.negated then
+			id = id:gsub("^%-", "") -- a negation that changes nothing for a projectile: the plain modifier
+		end
+		if r and not seen[id] then
 			seen[id] = true
 			out[#out + 1] = id
 		end
@@ -232,16 +327,22 @@ end
 
 -- Does the projectile already carry this modifier from its own cast? Only the modifier's own extra entities and game
 -- effects count; shared sparkle particles (data/entities/particles/) would match unrelated modifiers. Modifiers that
--- are only numbers can't be recognised (the field's own cast siblings are marked in field_init.lua instead).
+-- are only numbers can't be recognised (the field's own cast siblings are marked in field_init.lua instead). A negated
+-- modifier ("-<ID>") can't be recognised either: its numbers can't be read back, and without Sign Flip its extras are
+-- the plain ones. Whole entries only: Sign Flip's flipped files (mods/sign_flip/files/gen/flip/data/...) contain the
+-- vanilla path.
 local function already_has(pc, r)
-	local own = (ComponentObjectGetValue2(pc, "config", "extra_entities") or "") .. ","
-		.. (ComponentGetValue2(pc, "damage_game_effect_entities") or "")
+	if r.negated then
+		return false
+	end
+	local own = "," .. (ComponentObjectGetValue2(pc, "config", "extra_entities") or "") .. ","
+		.. (ComponentGetValue2(pc, "damage_game_effect_entities") or "") .. ","
 	local any = false
 	for _, list in ipairs({ r.extra_entities or {}, r.game_effect_entities or {} }) do
 		for _, f in ipairs(list) do
 			if not f:find("data/entities/particles/", 1, true) then
 				any = true
-				if not own:find(f, 1, true) then
+				if not own:find("," .. f .. ",", 1, true) then
 					return false
 				end
 			end
@@ -270,7 +371,7 @@ function M.apply(p, pc, r)
 	end
 	local list = ComponentGetValue2(pc, "damage_game_effect_entities") or ""
 	for _, f in ipairs(r.game_effect_entities or {}) do
-		if not list:find(f, 1, true) then
+		if not ("," .. list .. ","):find("," .. f .. ",", 1, true) then
 			if list ~= "" and list:sub(-1) ~= "," then
 				list = list .. ","
 			end
@@ -292,7 +393,6 @@ function M.imbue_crossing(field, x, y, radius, ids)
 	if #ids == 0 then
 		return
 	end
-	local R = M.recipes()
 	local key = "," .. field .. ","
 	for _, p in ipairs(EntityGetInRadiusWithTag(x, y, radius + M.MAX_STEP, "projectile") or {}) do
 		if p ~= field then
@@ -314,7 +414,7 @@ function M.imbue_crossing(field, x, y, radius, ids)
 					for _, id in ipairs(ids) do
 						if not applied:find("," .. id .. ",", 1, true) then
 							applied = applied .. id .. ","
-							M.apply(p, pc, R[id])
+							M.apply(p, pc, M.recipe(id))
 						end
 					end
 					M.set_str(p, "fi_mods", applied)
@@ -327,26 +427,33 @@ end
 -- material converters from the modifiers (Water to poison, Freeze charge's freezing, ...) work over the whole
 -- circle: load them onto the field, keep only the converters and widen them to the field radius
 function M.setup_converters(e, radius, ids)
-	local R = M.recipes()
+	-- each file once: "-<ID>" and "<ID>" in one field share the same converters
+	local files, done = {}, {}
 	for _, id in ipairs(ids) do
-		for _, f in ipairs(R[id].converters or {}) do
-			local before = {}
-			for _, comp in ipairs(EntityGetAllComponents(e) or {}) do
-				before[comp] = true
+		for _, f in ipairs(M.recipe(id).converters or {}) do
+			if not done[f] then
+				done[f] = true
+				files[#files + 1] = f
 			end
-			EntityLoadToEntity(f, e)
-			for _, comp in ipairs(EntityGetAllComponents(e) or {}) do
-				if not before[comp] then
-					-- disabled converters wait for a script (Transmutation picks its materials in Lua); that script is not
-					-- kept on the field, so drop them too
-					if ComponentGetTypeName(comp) == "MagicConvertMaterialComponent" and ComponentGetIsEnabled(comp) then
-						ComponentSetValue2(comp, "radius", math.floor(radius))
-						ComponentSetValue2(comp, "is_circle", true)
-						ComponentSetValue2(comp, "loop", true)
-						ComponentSetValue2(comp, "kill_when_finished", false)
-					else
-						EntityRemoveComponent(e, comp)
-					end
+		end
+	end
+	for _, f in ipairs(files) do
+		local before = {}
+		for _, comp in ipairs(EntityGetAllComponents(e) or {}) do
+			before[comp] = true
+		end
+		EntityLoadToEntity(f, e)
+		for _, comp in ipairs(EntityGetAllComponents(e) or {}) do
+			if not before[comp] then
+				-- disabled converters wait for a script (Transmutation picks its materials in Lua); that script is not
+				-- kept on the field, so drop them too
+				if ComponentGetTypeName(comp) == "MagicConvertMaterialComponent" and ComponentGetIsEnabled(comp) then
+					ComponentSetValue2(comp, "radius", math.floor(radius))
+					ComponentSetValue2(comp, "is_circle", true)
+					ComponentSetValue2(comp, "loop", true)
+					ComponentSetValue2(comp, "kill_when_finished", false)
+				else
+					EntityRemoveComponent(e, comp)
 				end
 			end
 		end
@@ -357,10 +464,9 @@ end
 -- black hole): files/gun_append.lua kept the modifiers' own pieces off the whole shot, so give them back, and mark the
 -- projectile as already carrying the shot's modifiers so its sibling field doesn't add their numbers a second time.
 function M.restore_cast_pieces(p, ids)
-	local R = M.recipes()
 	local applied = M.get_str(p, "fi_mods", ",")
 	for _, id in ipairs(ids) do
-		local r = R[id]
+		local r = M.recipe(id)
 		if applied:find("," .. id .. ",", 1, true) then
 			r = {} -- already carries it
 		end
@@ -411,9 +517,9 @@ end
 -- re-apply the modifiers' game effects to creatures inside the field (never the caster, matching the vanilla
 -- circle, §6.2). Effects whose name could not be read are skipped, so nothing stacks.
 function M.reapply_area(field, x, y, radius, ids)
-	local R, effects = M.recipes(), {}
+	local effects = {}
 	for _, id in ipairs(ids) do
-		for _, ef in ipairs(R[id].effects or {}) do
+		for _, ef in ipairs(M.recipe(id).effects or {}) do
 			if ef.effect then
 				effects[#effects + 1] = ef
 			end

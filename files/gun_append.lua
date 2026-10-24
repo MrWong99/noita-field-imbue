@@ -12,6 +12,16 @@ local function fi_get_recipes()
 	return fi_recipes
 end
 
+-- Sign Flip (another mod), if loaded: what a flipped modifier adds instead of its own pieces (its gen/opposites.lua)
+local fi_sf_opposites
+local function fi_get_sf_opposites()
+	if fi_sf_opposites == nil then
+		local ok, o = pcall(dofile_once, "mods/sign_flip/files/gen/opposites.lua")
+		fi_sf_opposites = ok and type(o) == "table" and o or false
+	end
+	return fi_sf_opposites
+end
+
 -- remember which modifiers are cast in the shot (RANDOM_MODIFIER runs the one it picks, which records itself),
 -- and whether the shot has a static projectile (RANDOM_STATIC_PROJECTILE runs the one it picks, too)
 for _, a in ipairs(actions or {}) do
@@ -57,12 +67,29 @@ function register_action(state)
 		local recipes = fi_get_recipes()
 		if recipes then
 			local markers = {}
+			-- Sign Flip (another mod) lists the modifiers it flipped in this shot. Counted per id: the same modifier can be
+			-- in the shot both flipped and not. A flipped one put its opposite pieces into the shot (anti homing, a
+			-- reversed converter, a trail's eater): those are the pieces kept off the field.
+			local negated = {}
+			for id in (state.sf_negated or ""):gmatch("[^,]+") do
+				negated[id] = (negated[id] or 0) + 1
+			end
 			for id in (state.fi_mods or ""):gmatch("[^,]+") do
 				local r = recipes[id]
 				if r then
-					markers[#markers + 1] = "mods/field_imbue/files/gen/mod/" .. id .. ".xml,"
+					local neg = (negated[id] or 0) > 0
+					local O = neg and fi_get_sf_opposites()
+					if neg then
+						negated[id] = negated[id] - 1
+					end
+					markers[#markers + 1] = "mods/field_imbue/files/gen/mod/" .. id .. (neg and ".neg" or "") .. ".xml,"
 					for _, f in ipairs(r.extra_entities or {}) do
-						state.extra_entities = remove_entry(state.extra_entities, f)
+						state.extra_entities = remove_entry(state.extra_entities, O and O.extra[f] or f)
+					end
+					for _, m in ipairs(O and r.trail_material or {}) do
+						if O.eat[m] then
+							state.extra_entities = remove_entry(state.extra_entities, O.eat[m])
+						end
 					end
 				end
 			end

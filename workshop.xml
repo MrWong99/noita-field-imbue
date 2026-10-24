@@ -17,6 +17,8 @@ Works with 130 vanilla modifiers, and modifiers from other mods are picked up au
 [/list]
 [b]Entangled Worlds[/b]: works in multiplayer. Every player needs the mod and the same settings.
 
+[b]Sign Flip[/b]: with the Sign Flip mod, circles hand out flipped modifiers too - a Sign flip -> Damage plus circle heals what the bolts hit, a Sign flip -> Homing circle makes them flee enemies. https://github.com/MrWong99/noita-sign-flip
+
 Source, notes and issues: https://github.com/MrWong99/noita-field-imbue (MIT)"
 	tags="spells,gameplay"
 	dont_upload_folders=".git|probe|docs|tools|dist"

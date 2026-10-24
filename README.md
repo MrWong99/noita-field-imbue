@@ -53,6 +53,20 @@ Every player needs the mod (same version) and the same settings; Entangled World
 field logic is deterministic and runs on every player's copy of the field. Effects on enemies are only applied by the player
 that owns the enemy, as Entangled Worlds expects.
 
+## Sign Flip
+
+With the [Sign Flip](https://github.com/MrWong99/noita-sign-flip) mod, a circle hands out modifiers the way Sign flip
+left them in its cast:
+- **Sign flip → Damage plus** heals the targets of bolts flying through the circle.
+- **Sign flip → Speed up** slows those bolts to ×0.4.
+- **Sign flip → Homing** makes them steer away from enemies.
+- **Sign flip → Water to poison** turns poison into water over the circle.
+- **Sign flip → Fire trail** puts out fire over the circle and on the bolts' paths.
+
+Sign flip can go before or after Field resonance: `Field resonance → Sign flip → Damage plus → Circle of fervour` and
+`Sign flip → Field resonance → Damage plus → Circle of fervour` both work. The same modifier can be in one circle both
+flipped and plain. Each mod works without the other.
+
 ## Known limits
 
 - *Electric charge* imbues its electric damage, but not its lightning on hit.
