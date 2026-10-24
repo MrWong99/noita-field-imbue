@@ -63,6 +63,7 @@ cast:
 - **Sign flip → Homing** makes them steer away from enemies.
 - **Sign flip → Water to poison** turns poison into water over the circle.
 - **Sign flip → Fire trail** puts out fire over the circle and on the bolts' paths.
+- **Sign flip → Explosive projectile** makes the bolts implode: they pull things in, then explode harder in a smaller radius.
 
 Sign flip can go before or after Field resonance: `Field resonance → Sign flip → Damage plus → Circle of fervour` and
 `Sign flip → Field resonance → Damage plus → Circle of fervour` both work. The same modifier can be in one circle both
