@@ -55,8 +55,9 @@ that owns the enemy, as Entangled Worlds expects.
 
 ## Sign Flip
 
-With the [Sign Flip](https://github.com/MrWong99/noita-sign-flip) mod, a circle hands out modifiers the way Sign flip
-left them in its cast:
+With the Sign Flip mod ([Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3826087249),
+[GitHub](https://github.com/MrWong99/noita-sign-flip)), a circle hands out modifiers the way Sign flip left them in its
+cast:
 - **Sign flip → Damage plus** heals the targets of bolts flying through the circle.
 - **Sign flip → Speed up** slows those bolts to ×0.4.
 - **Sign flip → Homing** makes them steer away from enemies.
