@@ -520,6 +520,26 @@ Probe verification (2026-10-24, `tools/probe-run.sh sweep IDS "enemy destructive
 - Circle of buoyancy, which EW position-syncs, is untested in multiplayer.
 - **The generic version has not been re-tested with two players yet.**
 
+### 6.5 Sign Flip integration (0.3.0, 2026-10-24)
+
+[Sign Flip](https://github.com/MrWong99/noita-sign-flip) adds a modifier that negates the next one. Its cast-time wrapper
+lists the modifiers it flipped in `c.sf_negated`. Field Imbue reads that in `register_action`:
+- **Markers.** Each flipped occurrence becomes the marker `gen/mod/<ID>.neg.xml` (`fi_mod = "-<ID>"`), counted per id,
+  so one circle can carry `DAMAGE` and `-DAMAGE` at once.
+- **Stripping.** The flipped modifier's own pieces are stripped from the circle (anti homing, a reversed converter, a
+  trail's eater). They are found through Sign Flip's generated `mods/sign_flip/files/gen/opposites.lua`.
+- **Negated recipes.** `fi_lib.recipe("-<ID>")` builds them lazily:
+  - numbers negated, with damage taken away moved to healing because the engine ignores negative damage;
+  - the speed factor inverted;
+  - extras and converters mapped through Sign Flip's table;
+  - trails turned into eaters, on bolts and over the circle, with their on-hit effects dropped.
+  - A negation that changes nothing for a projectile collapses back to the plain id.
+- **`already_has`** matches whole entries: Sign Flip's flipped files contain the vanilla path.
+- **Independence.** Without Sign Flip nothing changes. Load order doesn't matter.
+
+Tested by Sign Flip's probe suites `fi` and `fi-first` (Field Imbue loaded after or before Sign Flip; flipped, mixed,
+homing, converter and fire-trail circles; clean circle centre) and by its `tools/sim.lua`.
+
 ---
 
 ## 7. Decisions for you
