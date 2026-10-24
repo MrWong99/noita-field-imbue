@@ -535,6 +535,9 @@ lists the modifiers it flipped in `c.sf_negated`. Field Imbue reads that in `reg
   - trails turned into eaters, on bolts and over the circle, with their on-hit effects dropped.
   - A negation that changes nothing for a projectile collapses back to the plain id.
 - **`already_has`** matches whole entries: Sign Flip's flipped files contain the vanilla path.
+- **Implosions (0.3.1).** A flipped explosion modifier (Explosive projectile, Clustermod) keeps its explosion numbers
+  and hands out Sign Flip's implode marker instead (`fi_lib.implodes`, same rule as Sign Flip). The circle keeps the
+  marker too, so it implodes when it ends instead of exploding bigger.
 - **Independence.** Without Sign Flip nothing changes. Load order doesn't matter.
 
 Tested by Sign Flip's probe suites `fi` and `fi-first` (Field Imbue loaded after or before Sign Flip; flipped, mixed,

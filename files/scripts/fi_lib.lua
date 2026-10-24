@@ -44,6 +44,13 @@ end
 local HEAL_INSTEAD = { damage_projectile_add = true, damage_melee_add = true, damage_electricity_add = true,
 	damage_fire_add = true, damage_ice_add = true, damage_slice_add = true, damage_curse_add = true, damage_drill_add = true }
 
+-- does flipping this recipe make its explosion negative (bigger, or stronger at the same size)? Sign Flip's rule too.
+function M.implodes(r)
+	local add = r.add or {}
+	local dr, dd = add.explosion_radius or 0, add.damage_explosion_add or 0
+	return dr > 0 or (dr == 0 and dd > 0)
+end
+
 local sf_opposites
 local function opposites()
 	if sf_opposites == nil then
@@ -60,18 +67,25 @@ local function negate(r)
 		n[k] = v
 	end
 	n.add, n.negated = {}, true
+	local O = opposites()
+	-- An explosion the flip would make negative is an implosion instead (Sign Flip's rule): its numbers stay and the
+	-- projectile gets Sign Flip's implode marker.
+	local implosion = O and O.implode and M.implodes(r)
 	for k, v in pairs(r.add or {}) do
-		if HEAL_INSTEAD[k] and v > 0 then
-			k = "damage_healing_add"
+		if implosion and (k == "explosion_radius" or k == "damage_explosion_add") then
+			n.add[k] = (n.add[k] or 0) + v
+		else
+			if HEAL_INSTEAD[k] and v > 0 then
+				k = "damage_healing_add"
+			end
+			n.add[k] = (n.add[k] or 0) - v
 		end
-		n.add[k] = (n.add[k] or 0) - v
 		different = true
 	end
 	if r.speed and r.speed ~= 0 and r.speed ~= 1 then
 		n.speed = 1 / r.speed
 		different = true
 	end
-	local O = opposites()
 	if O then
 		local drop = false
 		n.extra_entities, n.converters = {}, {}
@@ -103,6 +117,9 @@ local function negate(r)
 		end
 		if drop then
 			n.game_effect_entities, n.effects = {}, {}
+		end
+		if implosion then
+			n.extra_entities[#n.extra_entities + 1] = O.implode
 		end
 	end
 	return n, different
