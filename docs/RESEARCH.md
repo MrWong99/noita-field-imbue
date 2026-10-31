@@ -543,6 +543,20 @@ lists the modifiers it flipped in `c.sf_negated`. Field Imbue reads that in `reg
 Tested by Sign Flip's probe suites `fi` and `fi-first` (Field Imbue loaded after or before Sign Flip; flipped, mixed,
 homing, converter and fire-trail circles; clean circle centre) and by its `tools/sim.lua`.
 
+
+### 6.6 Resonant field (0.4.0, 2026-10-31)
+
+`RESONANT_FIELD` is a static projectile spell: a circle with no effect of its own and Field resonance built in.
+- **Entity** `files/entities/resonant_field.xml`: vanilla `base_field.xml` (radius 28, speed 0) with the charm effect
+  cleared (`damage_game_effect_entities=""`), the charm sprite particles off, and purple/white sparks.
+- **Card**: adds `field_imbue.xml` to the shot and sets `c.fi_imbue`, like Field resonance. Being a static projectile, the
+  wrapper in `gun_append.lua` sets `c.fi_static`, so the usual stripping and markers apply. With Field resonance in the same
+  cast as well, the second copy of the scripts is dropped as before.
+- **Probe** (`tools/probe-run.sh prototype`):
+  - P10: plain Resonant field. A sheep inside gets no effect (no charm), and the field drops its scripts (no payload).
+  - P11: `Freeze charge → Resonant field`. A bolt through it gets `effect_frozen`, +0.2 ice and the converters, and the
+    sheep beyond froze.
+
 ---
 
 ## 7. Decisions for you
