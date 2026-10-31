@@ -26,6 +26,8 @@ local WANDS = {
 	imbue_bolt = "FIELD_IMBUE,LIGHT_BULLET",
 	fast_bolt = "SPEED,SPEED,SPEED,LIGHT_BULLET",
 	freeze_bolt = "FREEZE,LIGHT_BULLET",
+	resonant_freeze = "FREEZE,RESONANT_FIELD",
+	resonant_plain = "RESONANT_FIELD",
 }
 
 -- suite.txt, first word: "prototype" / "sweep" / "ew"; anything else runs the research probes (§6).
@@ -513,7 +515,7 @@ local function cast_field(wand, x, y)
 	equip(wand)
 	local snap = snapshot()
 	fire(1, 0)
-	local field = wait_new(snap, "berserk_field", 20)
+	local field = wait_new(snap, wand:find("resonant", 1, true) and "resonant_field" or "berserk_field", 20)
 	if field then
 		EntitySetTransform(field, x, y)
 	end
@@ -675,6 +677,22 @@ local function proto_bolt_kind(tag, wand)
 		log(tag, "NO BOLT")
 	end
 	kill(bolt, field)
+	wait(10)
+end
+
+-- P10: Resonant field on its own does nothing to creatures inside it, and carries no scripts
+local function proto_resonant_plain()
+	local fx, fy = PX + PAD_DX, PY
+	local field = cast_field("resonant_plain", fx, fy)
+	if not field then
+		log("P10 NO FIELD")
+		return
+	end
+	local sheep = spawn_sheep(fx + 15, fy)
+	wait(90)
+	log("P10 plain resonant field: sheep effects:", effects(sheep), "CHARM=" .. GameGetGameEffectCount(sheep, "CHARM"), "(want all 0)")
+	luas("P10 field", field)
+	kill(field, sheep)
 	wait(10)
 end
 
@@ -904,6 +922,8 @@ local function run_prototype()
 	proto_bolt_through("P3 control-freeze", "freeze_field", "FROZEN")
 	proto_nonfield_host()
 	proto_bolt_through("P5 imbue-fire", "imbue_burn_field", "ON_FIRE")
+	proto_bolt_through("P11 resonant-freeze", "resonant_freeze", "FROZEN")
+	proto_resonant_plain()
 end
 
 -- Entangled Worlds two-peer check (docs/RESEARCH.md §6 test 6) -----------------------------------------------------

@@ -21,6 +21,12 @@ modifiers. The circle then:
 
 Circles cast without Field resonance behave exactly like vanilla.
 
+### Resonant field
+
+**Resonant field** is a circle spell with Field resonance built in and no effect of its own. Put modifiers in front of it
+and they go straight into the field: `Freeze charge → Resonant field` is a field that freezes what's inside it and every
+bolt flying through it. On its own it does nothing.
+
 **130 of the vanilla modifiers work**, and modifiers added by other mods are picked up automatically when the game loads.
 Excluded:
 
@@ -35,6 +41,7 @@ Excluded:
 | Freezing field | Field resonance → Freeze charge → Circle of fervour |
 | Burning field | Field resonance → Burning trail → Circle of fervour |
 | Seeker field | Field resonance → Homing → Damage plus → Circle of stillness |
+| Pure freezing field | Freeze charge → Resonant field |
 
 Cast the field, then shoot through it with any other wand.
 
@@ -73,7 +80,7 @@ flipped and plain. Each mod works without the other.
 
 - *Electric charge* imbues its electric damage, but not its lightning on hit.
 - Hit-effect modifiers (curses, petrify, critical on …) imbue projectiles but don't act over the circle's area.
-- Field resonance has to be in the **same cast** as the circle; it doesn't reach a circle inside a trigger payload.
+- Field resonance has to be in the **same cast** as the circle (Resonant field always is); it doesn't reach a circle inside a trigger payload.
 - Projectiles shot by other projectiles (chain-spell children, trigger payloads, sub-projectiles) are not imbued. This keeps
   spawning modifiers from cascading.
 

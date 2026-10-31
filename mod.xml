@@ -1,6 +1,6 @@
 <Mod
     name="Field Imbue"
-    description="Adds Field resonance: a modifier that makes a field keep applying its modifiers' effects inside its circle and pass them on to every projectile flying through it. Works with Entangled Worlds."
+    description="Adds Field resonance: a modifier that makes a field keep applying its modifiers' effects inside its circle and pass them on to every projectile flying through it, and Resonant field: an empty circle with Field resonance built in. Works with Entangled Worlds."
     request_no_api_restrictions="0"
     is_game_mode="0"
 >

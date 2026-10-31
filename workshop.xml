@@ -8,6 +8,8 @@ Cast it together with a circle and any other modifiers. The circle then:
 [*]keeps applying their effects (fire, freeze, oil, poison, ...) to enemies standing inside it
 [*]runs their material converters (Water to poison, ...) over the whole circle
 [/list]
+[b]Resonant field[/b] is a new circle spell with Field resonance built in and no effect of its own: put modifiers in front of it and they go straight into the field (Freeze charge -> Resonant field).
+
 Works with 130 vanilla modifiers, and modifiers from other mods are picked up automatically. Circles cast without Field resonance stay vanilla.
 
 [b]Settings[/b] (apply from the next new run):
