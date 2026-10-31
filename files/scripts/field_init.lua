@@ -42,6 +42,7 @@ fi.set_str(e, "fi_payload", table.concat(ids, ","))
 fi.set_float(e, "fi_radius", radius)
 EntityAddTag(e, "fi_field")
 fi.setup_converters(e, radius, ids)
+fi.tint(e, radius, ids)
 for _, list in ipairs({ ticks, reapplies }) do
 	if list[1] then
 		EntitySetComponentIsEnabled(e, list[1], true)

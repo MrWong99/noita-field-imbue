@@ -28,6 +28,18 @@ local WANDS = {
 	freeze_bolt = "FREEZE,LIGHT_BULLET",
 	resonant_freeze = "FREEZE,RESONANT_FIELD",
 	resonant_plain = "RESONANT_FIELD",
+	-- 0.5.0: hit effects over the area, Field resonance in a trigger payload, tinted fields
+	resonant_curse = "CURSE,RESONANT_FIELD",
+	resonant_wither = "CURSE_WITHER_PROJECTILE,RESONANT_FIELD",
+	resonant_petrify = "HITFX_PETRIFY,RESONANT_FIELD",
+	resonant_toxic_charm = "HITFX_TOXIC_CHARM,RESONANT_FIELD",
+	resonant_slime_explosion = "HITFX_EXPLOSION_SLIME,RESONANT_FIELD",
+	trigger_freeze_field = "LIGHT_BULLET_TRIGGER,FIELD_IMBUE,FREEZE,BERSERK_FIELD",
+	timer_freeze_field = "LIGHT_BULLET_TIMER,FIELD_IMBUE,FREEZE,BERSERK_FIELD",
+	timer_resonant_freeze = "LIGHT_BULLET_TIMER,FREEZE,RESONANT_FIELD",
+	timer_plain_field = "LIGHT_BULLET_TIMER,FREEZE,BERSERK_FIELD",
+	timer_bolt = "LIGHT_BULLET_TIMER,LIGHT_BULLET",
+	imbue_mixed_field = "FIELD_IMBUE,FREEZE,BURN_TRAIL,HOMING,BERSERK_FIELD",
 }
 
 -- suite.txt, first word: "prototype" / "sweep" / "ew"; anything else runs the research probes (§6).
@@ -248,8 +260,12 @@ local function effects(e)
 		return "dead"
 	end
 	local out = {}
-	for _, name in ipairs({ "BERSERK", "FROZEN", "ON_FIRE", "OILED", "WET" }) do
+	for _, name in ipairs({ "BERSERK", "FROZEN", "ON_FIRE", "OILED", "WET", "CHARM" }) do
 		out[#out + 1] = name .. "=" .. GameGetGameEffectCount(e, name)
+	end
+	local genome = EntityGetFirstComponentIncludingDisabled(e, "GenomeDataComponent")
+	if genome then
+		out[#out + 1] = "herd=" .. HerdIdToString(ComponentGetValue2(genome, "herd_id"))
 	end
 	local dm = EntityGetFirstComponentIncludingDisabled(e, "DamageModelComponent")
 	if dm then
@@ -511,11 +527,19 @@ local function luas(tag, e)
 		"tags=" .. tostring(EntityGetTags(e)))
 end
 
+-- a trigger wand's field comes from the payload: the hit-world bolt is fired down at the ground, the timer bolt to
+-- the side; either way the field is moved where the check wants it once it appears
 local function cast_field(wand, x, y)
 	equip(wand)
 	local snap = snapshot()
-	fire(1, 0)
-	local field = wait_new(snap, wand:find("resonant", 1, true) and "resonant_field" or "berserk_field", 20)
+	local trigger = wand:find("trigger", 1, true) ~= nil
+	if trigger then
+		fire(0, 1)
+	else
+		fire(1, 0)
+	end
+	local slow = trigger or wand:find("timer", 1, true) ~= nil
+	local field = wait_new(snap, wand:find("resonant", 1, true) and "resonant_field" or "berserk_field", slow and 120 or 20)
 	if field then
 		EntitySetTransform(field, x, y)
 	end
@@ -558,6 +582,13 @@ local function proto_bolt_through(tag, field_wand, effect)
 		log(tag, "NO FIELD")
 		return
 	end
+	-- a payload field's carrier bolt is still flying (towards where the sheep goes): remove it and anything else
+	for _, p in ipairs(EntityGetWithTag("projectile") or {}) do
+		if p ~= field then
+			kill(p)
+		end
+	end
+	wait(2)
 	local sx, sy = PX + 180, PY - 4
 	local sheep = spawn_sheep(sx, sy)
 	equip("bolt")
@@ -581,7 +612,9 @@ local function proto_bolt_through(tag, field_wand, effect)
 		if EntityGetIsAlive(bolt) then
 			local bx, by = EntityGetTransform(bolt)
 			if t % 3 == 0 then
-				log(tag, "trace t=" .. t, ("bolt rel=%+.0f,%+.0f"):format(bx - PX, by - PY), angle(bolt))
+				local hx, hy = EntityGetTransform(sheep)
+				log(tag, "trace t=" .. t, ("bolt rel=%+.0f,%+.0f"):format(bx - PX, by - PY), angle(bolt),
+					("sheep rel=%+.0f,%+.0f"):format((hx or 0) - PX, (hy or 0) - PY))
 			end
 			if not logged and bx > PX + 125 then -- past the field, before the sheep
 				logged = true
@@ -596,6 +629,15 @@ local function proto_bolt_through(tag, field_wand, effect)
 		if t % 10 == 0 then
 			log(tag, "t=" .. t, "target sheep:", effects(sheep), "| " .. effect .. "=" .. GameGetGameEffectCount(sheep, effect))
 		end
+	end
+	-- a bolt sometimes flies through the sheep without hitting it (plain bolts too, on the same path as the hits):
+	-- after a miss, three more bolts through the field
+	if EntityGetIsAlive(sheep) and GameGetGameEffectCount(sheep, effect) == 0 then
+		for _ = 1, 3 do
+			fire(sx - PX, sy - (PY - 4))
+		end
+		wait(20)
+		log(tag, "after 3 more bolts: target sheep:", effects(sheep), "| " .. effect .. "=" .. GameGetGameEffectCount(sheep, effect))
 	end
 	kill(bolt, field, sheep)
 	wait(10)
@@ -723,7 +765,7 @@ local function profile(e)
 	local counts = {}
 	for _, comp in ipairs(EntityGetAllComponents(e) or {}) do
 		local t = ComponentGetTypeName(comp)
-		if not SWEEP_IGNORE[t] then
+		if not SWEEP_IGNORE[t] and not ComponentHasTag(comp, "fi_tint") then -- the coloured rim is the field's own
 			counts[t] = (counts[t] or 0) + 1
 		end
 	end
@@ -912,6 +954,214 @@ local function proto_regress()
 	end
 end
 
+local function children_from(e, file)
+	local n = 0
+	for _, k in ipairs(EntityGetIsAlive(e) and EntityGetAllChildren(e) or {}) do
+		if EntityGetFilename(k) == file then
+			n = n + 1
+		end
+	end
+	return n
+end
+
+local function curse_damage(e)
+	for _, k in ipairs(EntityGetIsAlive(e) and EntityGetAllChildren(e) or {}) do
+		local v = EntityGetFirstComponentIncludingDisabled(k, "VariableStorageComponent", "effect_curse_damage")
+		if v then
+			return ("%.2f"):format(ComponentGetValue2(v, "value_float"))
+		end
+	end
+	return "none"
+end
+
+-- P12: hit-effect modifiers act over a field's area: Venomous curse (keeps the sheep cursed, damage not stacking, never
+-- the caster's herd), Weakening curse (one child), Petrify (only wounded sheep), Charm on toxic sludge (only the
+-- radioactive sheep). Explosion on slimy enemies, Personal gravity field, Critical on wet and Critical plus stay on-hit (no
+-- area entry in their recipes).
+local function proto_hit_area()
+	local R = dofile_once("mods/field_imbue/files/gen/recipes.lua")
+	for _, id in ipairs({ "CURSE", "CURSE_WITHER_PROJECTILE", "HITFX_PETRIFY", "HITFX_TOXIC_CHARM", "HITFX_EXPLOSION_SLIME", "GRAVITY_FIELD_ENEMY", "FIREBALL_RAY_ENEMY", "HITFX_CRITICAL_WATER", "CRITICAL_HIT" }) do
+		local parts = {}
+		for _, ef in ipairs(R[id] and R[id].effects or {}) do
+			parts[#parts + 1] = (ef.child and "child:" or "effect:") .. tostring(ef.effect or ef.file) .. "[" .. table.concat(ef.cond or {}, "+") .. "]"
+		end
+		log("P12 recipe", id, "area entries:", #parts > 0 and table.concat(parts, " ") or "none")
+	end
+	local fx, fy = PX + PAD_DX, PY
+
+	local field = cast_field("resonant_curse", fx, fy)
+	if not field then
+		log("P12 curse NO FIELD")
+	else
+		local foe = spawn_sheep(fx + 15, fy)
+		local ally = spawn_sheep(fx - 15, fy)
+		ComponentSetValue2(EntityGetFirstComponentIncludingDisabled(ally, "GenomeDataComponent"), "herd_id", StringToHerdId("player"))
+		-- the curse lasts 300 frames: still cursed at t=450 means the field cursed it again
+		for t = 1, 460 do
+			wait(1)
+			if t == 70 or t == 200 or t == 330 or t == 450 then
+				log("P12 curse t=" .. t, "sheep cursed=" .. tostring(EntityHasTag(foe, "effect_CURSE")),
+					"curse children=" .. children_from(foe, "data/entities/misc/curse.xml"), "curse damage=" .. curse_damage(foe),
+					"(want 0.08)", "| player-herd sheep cursed=" .. tostring(EntityHasTag(ally, "effect_CURSE")))
+			end
+		end
+		kill(field, foe, ally)
+		wait(10)
+	end
+
+	field = cast_field("resonant_wither", fx, fy)
+	if not field then
+		log("P12 wither NO FIELD")
+	else
+		local foe = spawn_sheep(fx + 15, fy)
+		for t = 1, 200 do
+			wait(1)
+			if t == 70 or t == 190 then
+				log("P12 wither t=" .. t, "curse_wither_projectile children=" .. children_from(foe, "data/entities/misc/curse_wither_projectile.xml"), "(want 1)")
+			end
+		end
+		kill(field, foe)
+		wait(10)
+	end
+
+	field = cast_field("resonant_petrify", fx, fy)
+	if not field then
+		log("P12 petrify NO FIELD")
+	else
+		local wounded = spawn_sheep(fx + 15, fy)
+		local dm = EntityGetFirstComponentIncludingDisabled(wounded, "DamageModelComponent")
+		ComponentSetValue2(dm, "hp", 12) -- 30% of 40: petrify works at 40% or less
+		local healthy = spawn_sheep(fx - 15, fy)
+		wait(75)
+		log("P12 petrify: wounded sheep alive=" .. tostring(EntityGetIsAlive(wounded)), "(want false)",
+			"| healthy sheep alive=" .. tostring(EntityGetIsAlive(healthy)), "(want true)")
+		kill(field, wounded, healthy)
+		wait(10)
+	end
+
+	field = cast_field("resonant_toxic_charm", fx, fy)
+	if not field then
+		log("P12 toxic charm NO FIELD")
+	else
+		local toxic = spawn_sheep(fx + 15, fy)
+		LoadGameEffectEntityTo(toxic, "data/entities/misc/effect_radioactive.xml")
+		local clean = spawn_sheep(fx - 15, fy)
+		wait(75)
+		log("P12 toxic charm: radioactive sheep CHARM=" .. GameGetGameEffectCount(toxic, "CHARM"), "(want 1)",
+			"| clean sheep CHARM=" .. GameGetGameEffectCount(clean, "CHARM"), "(want 0)")
+		kill(field, toxic, clean)
+		wait(10)
+	end
+
+	-- explosions on slimy enemies stay imbue-only (an ownerless blast every second would hit the caster too)
+	field = cast_field("resonant_slime_explosion", fx, fy)
+	if not field then
+		log("P12 slime explosion NO FIELD")
+	else
+		local slimy = spawn_sheep(fx + 15, fy)
+		LoadGameEffectEntityTo(slimy, "data/entities/misc/effect_slimy.xml")
+		local clean = spawn_sheep(fx - 15, fy)
+		wait(75)
+		log("P12 slime explosion (imbue-only): slimy sheep " .. effects(slimy), "(want hp=40)", "| clean sheep " .. effects(clean), "(want hp=40)")
+		kill(field, slimy, clean)
+		wait(10)
+	end
+end
+
+-- P13: Field resonance inside a trigger payload makes the payload's circle an imbuing field (P13a hit-world trigger,
+-- P13b timer, P13c Resonant field in a timer payload, P13d control: a payload circle without resonance stays vanilla)
+local function proto_payload_field(tag, wand)
+	local field = cast_field(wand, PX + 90, PY - 4)
+	if not field then
+		log(tag, "NO FIELD")
+		return
+	end
+	wait(3)
+	local pc = EntityGetFirstComponentIncludingDisabled(field, "ProjectileComponent")
+	local parent = ComponentGetValue2(pc, "mEntityThatShot")
+	log(tag, "payload field: shot by a projectile=" .. tostring(parent ~= 0 and parent ~= player), "who shot is player=" .. tostring(ComponentGetValue2(pc, "mWhoShot") == player))
+	luas(tag .. " field", field)
+	kill(field)
+	quiet_cleanup()
+end
+
+-- P14: a payload bolt (shot by the timer bolt) crossing an imbuing field is still not imbued
+local function proto_payload_bolt()
+	local field = cast_field("imbue_freeze_field", PX + 200, PY)
+	if not field then
+		log("P14 NO FIELD")
+		return
+	end
+	equip("timer_bolt")
+	local snap = snapshot()
+	fire(1, 0)
+	local bolts = {}
+	for _ = 1, 45 do
+		for _, p in ipairs(EntityGetWithTag("projectile") or {}) do
+			if not snap[p] and (EntityGetFilename(p) or ""):find("light_bullet", 1, true) then
+				local b = bolts[p]
+				if not b then
+					local pc = EntityGetFirstComponentIncludingDisabled(p, "ProjectileComponent")
+					local parent = pc and ComponentGetValue2(pc, "mEntityThatShot") or 0
+					b = { payload = parent ~= 0 and parent ~= player, minx = 1e9, maxx = -1e9 }
+					bolts[p] = b
+				end
+				b.mods = fi_get(p, "fi_mods") or b.mods
+				b.minx = math.min(b.minx, (EntityGetTransform(p)) - PX)
+				b.maxx = math.max(b.maxx, (EntityGetTransform(p)) - PX)
+			end
+		end
+		wait(1)
+	end
+	for _, b in pairs(bolts) do
+		log("P14 bolt payload=" .. tostring(b.payload), ("x from %+.0f to %+.0f"):format(b.minx, b.maxx), "(field 172..228: want across it)",
+			"fi_mods=" .. tostring(b.mods), b.payload and "(want nil)" or "")
+	end
+	kill(field)
+	quiet_cleanup()
+end
+
+local function tints(e)
+	local out = {}
+	for _, pe in ipairs(EntityGetComponentIncludingDisabled(e, "ParticleEmitterComponent", "fi_tint") or {}) do
+		out[#out + 1] = ComponentGetValue2(pe, "emitted_material_name")
+	end
+	return #out > 0 and table.concat(out, ",") or "none"
+end
+
+-- P15: an imbuing field shows its payload's colours; plain vanilla circles get none
+local function proto_tint()
+	local R = dofile_once("mods/field_imbue/files/gen/recipes.lua")
+	local by_colour, ids = {}, {}
+	for id, r in pairs(R) do
+		ids[#ids + 1] = id
+		if not id:find("^FI_PROBE") then -- this probe's own test card
+			by_colour[r.colour or "nil"] = (by_colour[r.colour or "nil"] or 0) + 1
+		end
+	end
+	table.sort(ids)
+	local summary = {}
+	for c, n in pairs(by_colour) do
+		summary[#summary + 1] = c .. "=" .. n
+	end
+	table.sort(summary)
+	log("P15 recipe colours:", table.concat(summary, " "))
+	for _, id in ipairs(ids) do
+		log("P15 colour", id, tostring(R[id].colour))
+	end
+	for _, w in ipairs({ "imbue_freeze_field", "imbue_burn_field", "imbue_mixed_field", "resonant_freeze", "field", "freeze_field" }) do
+		local field = cast_field(w, PX + PAD_DX, PY)
+		if field then
+			wait(3)
+			log("P15", w, "tint emitters:", tints(field), "emitters total=" .. #(EntityGetComponentIncludingDisabled(field, "ParticleEmitterComponent") or {}))
+		else
+			log("P15", w, "NO FIELD")
+		end
+		kill(field)
+		quiet_cleanup()
+	end
+end
+
 local function run_prototype()
 	proto_herd()
 	proto_bolt_kind("P7 fast-bolt", "fast_bolt")
@@ -924,6 +1174,16 @@ local function run_prototype()
 	proto_bolt_through("P5 imbue-fire", "imbue_burn_field", "ON_FIRE")
 	proto_bolt_through("P11 resonant-freeze", "resonant_freeze", "FROZEN")
 	proto_resonant_plain()
+	proto_hit_area()
+	proto_payload_field("P13a trigger", "trigger_freeze_field")
+	proto_payload_field("P13b timer", "timer_freeze_field")
+	proto_payload_field("P13c timer-resonant", "timer_resonant_freeze")
+	proto_payload_field("P13d timer-control", "timer_plain_field")
+	proto_bolt_through("P13e timer-freeze bolt", "timer_freeze_field", "FROZEN")
+	proto_bolt_through("P13f timer-resonant bolt", "timer_resonant_freeze", "FROZEN")
+	proto_bolt_through("P13g trigger-freeze bolt", "trigger_freeze_field", "FROZEN")
+	proto_payload_bolt()
+	proto_tint()
 end
 
 -- Entangled Worlds two-peer check (docs/RESEARCH.md §6 test 6) -----------------------------------------------------

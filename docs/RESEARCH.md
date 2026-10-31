@@ -512,9 +512,12 @@ Probe verification (2026-10-24, `tools/probe-run.sh sweep IDS "enemy destructive
 **Not covered yet, or known limits:**
 - `lightning_count`: Electric charge's on-hit lightning is not imbued, only its electric damage and sparkle.
 - Firecrackers' `material`.
-- Area versions of hit-effect modifiers (curses, petrify, critical-on-X): they imbue projectiles only.
+- Area versions of hit-effect modifiers (curses, petrify, critical-on-X): they imbue projectiles only. **Done in §6.7**, except
+  the crits, which only mean something as part of a hit.
 - The Transmutation converter: no area effect; it still imbues.
-- Field resonance only works when it is in the **same shot** as the circle, not across a trigger.
+- Field resonance only works when it is in the **same shot** as the circle, not across a trigger. **§6.7:** a trigger
+  payload is its own shot, so Field resonance inside the payload together with the circle already worked; only Field
+  resonance outside the trigger doesn't reach the payload's circle.
 - Perk modifiers are not recorded.
 - Under EW, imbued Fizzle and Chaos-style extras use EW's fixed seed fallback, because the `ew_transmutation` VSC is only set at fire time.
 - Circle of buoyancy, which EW position-syncs, is untested in multiplayer.
@@ -556,6 +559,79 @@ homing, converter and fire-trail circles; clean circle centre) and by its `tools
   - P10: plain Resonant field. A sheep inside gets no effect (no charm), and the field drops its scripts (no payload).
   - P11: `Freeze charge → Resonant field`. A bolt through it gets `effect_frozen`, +0.2 ice and the converters, and the
     sheep beyond froze.
+
+### 6.7 Hit effects over the area, trigger payloads, tinted fields (0.5.0, 2026-10-31)
+
+**Hit-effect modifiers act over the area.** `recipes_build.lua` now reads the `HitEffectComponent`s of each recipe's extra
+entities and adds the ones that load something onto the creature hit to the recipe's `effects`, next to the game effects:
+- `LOAD_(UNIQUE_)GAME_EFFECT` → `{ file, effect, cond }`; `LOAD_(UNIQUE_)CHILD_ENTITY` → `{ file, child = true, cond, guard }`.
+- `cond` lists the game effects the creature must have. `condition_effect` is one already; `condition_status` (SLIMY,
+  RADIOACTIVE, ALCOHOLIC, ...) is mapped to the game effect its `status_list.lua` entry gives.
+- `CRITICAL_HIT_BOOST` and `DAMAGE_BOOST` (Critical on burning/wet/oiled/bloody) and `damage_critical_chance` (Critical plus)
+  are part of the hit itself and get no area entry. `LOAD_ENTITY` (the unused poltergeist) is skipped.
+- A child that is a projectile gets no area entry either: Explosion on slimy/drunk enemies (`hitfx_explode_explosion*.xml`,
+  lifetime 0, explodes at once) and Personal gravity field (`gravity_field_enemy.xml`, permanent, pulls every projectile
+  within 72 px). Loaded by a field, the explosion has no owner, so it hits the caster, their herd and other players, and
+  it goes off again on every re-apply since the child is gone by then (the giga one: radius 100, 125 HP, a big hole). The
+  gravity field would bend bolts only on the peer that owns the enemy. Found by the pre-merge review, see below.
+- `fi_lib.reapply_area` applies them every 60 frames with the existing rules (no caster, no caster's herd, no players
+  without friendly fire, only creatures `owned_here`). A child is loaded at the creature and parented to it, with the
+  `projectile_who_shot` VSC a hit would give it (curses and petrify credit kills to it). Nothing stacks: a child is only
+  loaded when the creature has none from the same file. Venomous curse's `curse_init.xml` removes itself and adds
+  `+0.08` damage on every load, so its guard is the `effect_CURSE` tag it leaves on the creature.
+- Vanilla modifiers this covers: Venomous curse, the four Weakening curses, Petrify, Charm on toxic sludge, and the
+  Personal fireball thrower / lightning caster / tentacler. The throwers make the enemy fire for 5000 frames, as a hit does;
+  only the owning peer loads them.
+- Sign Flip: a negated recipe drops the area entries of an extra that Sign Flip turns into another one (Venomous curse →
+  bless, Charm on toxic sludge → berserk, the wither curses → wards), so those only imbue. A negated recipe whose pieces were
+  swapped shows a white rim instead of the unflipped colour.
+
+**Field resonance in a trigger payload.** No change was needed. `add_projectile_trigger_*` runs
+`draw_shot(create_shot(n))` for the payload: a fresh shot state that is `c` while the payload's cards run, then goes
+through `register_action`. Field resonance and the circle in one payload therefore set `fi_imbue` / `fi_static` on that
+state, and the cast hook marks the payload's circle as for any other shot. The probe confirmed it on an unchanged 0.4.0
+`main` too, so the "same shot" limit was only in the docs. Field resonance *outside* the trigger is in the outer shot and
+doesn't reach the payload's circle. The rule that projectiles shot by other projectiles are not imbued is unchanged (P14).
+
+**Tinted fields.** Every recipe gets a `colour`: a spark material picked from its game effects, then words in its trail
+materials and extra/converter file names (a converter `<a>_to_<b>` by `<b>`), then its damage types; otherwise purple
+for on-hit effects, teal for other extras, white for numbers only. `fi_lib.tint` adds one cosmetic rim
+`ParticleEmitterComponent` (tag `fi_tint`) per distinct colour, at most 3 in payload order, when `field_init.lua` sets
+up an imbuing field. Plain circles are untouched. The 130 vanilla recipes: 69 teal, 15 red, 12 white, 9 purple, 8 orange
+(`spark_yellow`), 6 green, 5 electric, 2 dark blue, 2 oil, 1 ice blue, 1 pink.
+
+**Probe** (`tools/probe-run.sh prototype`, log [proto-log-2026-10-31.txt](proto-log-2026-10-31.txt)):
+
+| # | Check | Result |
+|---|---|---|
+| P12 | Venomous curse → Resonant field, sheep and a player-herd sheep inside | Sheep cursed at t=70, 200, 330 and 450 (past the 300-frame curse), always 1 curse child, damage stays 0.08. Player-herd sheep never cursed. |
+| P12 | Weakening curse (projectiles) | 1 child at t=70 and t=190. |
+| P12 | Petrify | Sheep at 30% hp petrified (dead), full-hp sheep alive. |
+| P12 | Charm on toxic sludge | Radioactive sheep charmed, clean sheep not. |
+| P12 | Explosion on slimy enemies | Imbue-only: no area entry, slimy and clean sheep both untouched. |
+| P12 | Critical on wet, Critical plus, Personal gravity field | No area entries in their recipes; Personal fireball thrower has one. |
+| P13a–c | Spark bolt with trigger/timer → Field resonance → Freeze charge → Circle of fervour; timer → Freeze charge → Resonant field | The payload circle (shot by the bolt, `mWhoShot` = player) is an imbuing field with payload `FREEZE`, scripts on. |
+| P13d | Timer → Freeze charge → Circle of fervour (no resonance) | Payload circle stays vanilla. |
+| P13e–g | A bolt through each payload field | Bolt gets `effect_frozen`, +0.2 ice, the converters. The target sheep froze in P13e and P13g; in P13f none of the 4 bolts touched the sheep in the final run (harness flake, see below), it froze in the two runs before. |
+| P14 | Timer bolt's payload bolt through an imbuing field | Spawned at x=+128, flew across the field (172..228) to +328: not imbued. The timer bolt itself is. |
+| P15 | Rim colours | Freeze field `spark_blue`, Burning trail `spark_yellow`, Freeze + Burning trail + Homing `spark_blue,spark_yellow,spark_teal`, Resonant freeze `spark_blue`; plain and vanilla freeze circles none. |
+
+P1–P11 unchanged. Sign Flip's own `fi` and `fi-first` suites (Field Imbue after / before Sign Flip): 14 passed, 0 failed
+each. **Sweep** ([sweep-log-2026-10-31.txt](sweep-log-2026-10-31.txt)): payload 130/130, clean centre
+130/130 (the sweep ignores the `fi_tint` emitters), imbued bolt 130/130; R1–R3 and E1 as before.
+
+**Harness notes.** A payload field's carrier bolt is still flying when the target sheep spawns, so the bolt-through check
+removes leftover projectiles first. A spark bolt sometimes passes through the sheep without hitting it, on the same path
+as bolts that hit (plain bolts too: P3's control and P2's first bolt in the final run). After a miss the check fires three
+more bolts through the field.
+
+**Pre-merge review** (a workflow: four reviewers — Lua correctness, gameplay, multiplayer/compat, docs/probe — and two
+skeptics per finding). Confirmed and fixed: projectile children over the area (above), the Sign Flip colour of swapped
+pieces, the colour counts (the probe's own marker card was counted), the README colour legend, and P14 not showing that
+the payload bolt crossed the field.
+
+**Not covered:** two-player Entangled Worlds for these features. The design keeps to the EW rules: the area children and
+effects are only applied by the peer that owns the creature, and the rim is cosmetic.
 
 ---
 
