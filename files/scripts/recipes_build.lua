@@ -87,6 +87,105 @@ end
 
 local spawned = 0
 
+-- On-hit effects (HitEffectComponent) that also mean something for a creature standing in a field: loading a game
+-- effect or a child entity, maybe only onto creatures that have some effect or status. Critical hits and damage boosts
+-- are part of the hit itself, so those stay imbue-only.
+local HIT_EFFECT_KINDS = { LOAD_UNIQUE_GAME_EFFECT = "effect", LOAD_GAME_EFFECT = "effect",
+	LOAD_UNIQUE_CHILD_ENTITY = "child", LOAD_CHILD_ENTITY = "child" }
+-- children that remove themselves right away and leave something else behind: the root tag that means the creature
+-- already has it (Venomous curse's curse_init.xml stacks +0.08 damage on every load otherwise)
+local HIT_GUARD_TAGS = { ["data/entities/misc/curse_init.xml"] = "effect_CURSE" }
+local status_effect -- status id (SLIMY, RADIOACTIVE, ...) -> the game effect it gives, read in build()
+
+local function attr(s, name)
+	local v = s:match("%s" .. name .. '%s*=%s*"([^"]*)"')
+	if v ~= "" and v ~= "NONE" then
+		return v
+	end
+end
+
+-- The colour an imbuing field shows for a modifier (a spark material, see fi_lib.tint): the first match in what the
+-- modifier puts on a projectile, in this order: its game effects, words starting its trail materials and files (a
+-- converter "<a>_to_<b>" by what it makes), its damage types. Anything else gets a colour for its kind: on-hit effects
+-- purple, other extras teal, only numbers white.
+local EFFECT_COLOURS = { FROZEN = "spark_blue", ON_FIRE = "spark_yellow", ELECTROCUTION = "spark_electric",
+	CHARM = "spark_purple_bright", WET = "spark_blue_dark", RADIOACTIVE = "spark_green", POISON = "spark_green",
+	BERSERK = "spark_red", BLOODY = "spark_red", OILED = "spark_player", SLIMY = "spark_purple_bright" }
+local WORD_COLOURS = {
+	{ "curse", "spark_purple" }, { "freez", "spark_blue" }, { "ice", "spark_blue" }, { "snow", "spark_blue" },
+	{ "fire", "spark_yellow" }, { "burn", "spark_yellow" }, { "lava", "spark_yellow" }, { "electr", "spark_electric" },
+	{ "lightning", "spark_electric" }, { "water", "spark_blue_dark" }, { "poison", "spark_green" }, { "acid", "spark_green" },
+	{ "toxic", "spark_green" }, { "radioactive", "spark_green" }, { "blood", "spark_red" }, { "explo", "spark_red" },
+	{ "gunpowder", "spark_red" }, { "heal", "spark_green_bright" }, { "oil", "spark_player" }, { "slime", "spark_purple_bright" },
+}
+local ADD_COLOURS = {
+	{ "damage_ice_add", "spark_blue" }, { "damage_fire_add", "spark_yellow" }, { "damage_electricity_add", "spark_electric" },
+	{ "damage_curse_add", "spark_purple" }, { "damage_healing_add", "spark_green_bright" },
+	{ "damage_explosion_add", "spark_red" }, { "explosion_radius", "spark_red" },
+}
+
+local function colour(r)
+	for _, ef in ipairs(r.effects or {}) do
+		if EFFECT_COLOURS[ef.effect] then
+			return EFFECT_COLOURS[ef.effect]
+		end
+	end
+	local words, extras = {}, 0
+	for _, list in ipairs({ r.trail_material or {}, r.game_effect_entities or {}, r.extra_entities or {} }) do
+		for _, w in ipairs(list) do
+			if not w:find("data/entities/particles/", 1, true) then -- shared sparkles say nothing about the modifier
+				local name = w:match("[^/]*$")
+				words[#words + 1] = name:match("_to_(.*)") or name
+				extras = extras + (list == r.extra_entities and 1 or 0)
+			end
+		end
+	end
+	local text = table.concat(words, ",")
+	for _, wc in ipairs(WORD_COLOURS) do
+		if text:find("%f[%a]" .. wc[1]) then
+			return wc[2]
+		end
+	end
+	for _, kc in ipairs(ADD_COLOURS) do
+		if (r.add or {})[kc[1]] then
+			return kc[2]
+		end
+	end
+	if #(r.effects or {}) > 0 or #(r.game_effect_entities or {}) > 0 then
+		return "spark_purple"
+	elseif extras > 0 then
+		return "spark_teal"
+	end
+	return "spark_white"
+end
+
+local function hit_effect(attrs, from)
+	local kind, file = HIT_EFFECT_KINDS[attr(attrs, "effect_hit") or ""], attr(attrs, "value_string")
+	if not kind or not file then
+		return nil
+	end
+	local hit = { from = from, file = file, cond = {} }
+	local ce, cs = attr(attrs, "condition_effect"), attr(attrs, "condition_status")
+	if ce then
+		hit.cond[#hit.cond + 1] = ce
+	end
+	if cs then
+		if not status_effect[cs] then
+			return nil -- can't tell who has it
+		end
+		hit.cond[#hit.cond + 1] = status_effect[cs]
+	end
+	if kind == "effect" then
+		hit.effect = file_text(file):match('%seffect%s*=%s*"([%w_]+)"')
+		if not hit.effect or hit.effect == "CUSTOM" then
+			return nil
+		end
+	else
+		hit.child, hit.guard = true, HIT_GUARD_TAGS[file]
+	end
+	return hit
+end
+
 -- what one modifier does to a fresh shot, with the wand's mana and the RNG seed given
 local function evaluate(a, wand_mana, seed)
 	local base = {}
@@ -153,6 +252,15 @@ local function build()
 	dofile("data/scripts/gun/gun.lua") -- defines the shot helpers and loads gun_actions.lua with all appends
 	draw_actions = function() end -- gun.lua defines these, so they are stubbed afterwards
 	draw_action = function() end
+	status_effect = {}
+	if pcall(dofile, "data/scripts/status_effects/status_list.lua") then
+		for _, s in ipairs(status_effects or {}) do
+			local effect = s.effect_entity and s.effect_entity ~= "" and file_text(s.effect_entity):match('%seffect%s*=%s*"([%w_]+)"')
+			if effect and effect ~= "CUSTOM" and not status_effect[s.id] then
+				status_effect[s.id] = effect
+			end
+		end
+	end
 
 	for _, a in ipairs(actions or {}) do
 		if a.type == ACTION_TYPE_MODIFIER and type(a.id) == "string" then
@@ -177,15 +285,20 @@ local function build()
 						local effect = file_text(f):match('%seffect%s*=%s*"([%w_]+)"')
 						r.effects[#r.effects + 1] = { file = f, effect = effect ~= "CUSTOM" and effect or nil }
 					end
-					-- extra entities with an active material converter also work over the field's area
+					-- extra entities with an active material converter also work over the field's area, and so do their
+					-- on-hit effects that load something onto the creature hit
 					for _, f in ipairs(r.extra_entities or {}) do
 						local text = file_text(f)
+						for attrs in text:gmatch("<HitEffectComponent(.-)>") do
+							r.effects[#r.effects + 1] = hit_effect(attrs, f)
+						end
 						local conv = text:match("<MagicConvertMaterialComponent[^>]*")
 						if conv and not conv:find('_enabled%s*=%s*"0"') then
 							r.converters = r.converters or {}
 							r.converters[#r.converters + 1] = f
 						end
 					end
+					r.colour = colour(r)
 					recipes[a.id] = r
 				end
 			end

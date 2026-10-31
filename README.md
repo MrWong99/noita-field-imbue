@@ -14,10 +14,19 @@ modifiers. The circle then:
   comes out burning; through a *Homing* circle it homes; through a *Heavy shot* circle it hits harder. Each projectile gets
   each modifier once, however many circles it crosses.
 - **keeps applying their effects to enemies inside it.** Vanilla circles apply an effect once per creature; an imbuing circle
-  re-applies fire, freeze, oil, poison, … every second.
+  re-applies fire, freeze, oil, poison, … every second. On-hit modifiers work over the circle too: *Venomous curse* and the
+  *Weakening curses* keep enemies inside cursed, *Petrify* turns wounded enemies to stone, *Charm on toxic sludge* charms
+  radioactive ones, *Explosion on slimy/drunk enemies* blows up slimy or drunk ones. Nothing stacks: an enemy that already
+  has the curse or effect is left alone.
 - **runs their material converters over the whole circle** (*Water to poison*, *Freeze charge*'s freezing, …).
 - **carries none of the modifiers' own pieces itself.** No burning or snowy centre, and it doesn't drift off with *Gravity* or
   *Fly upwards*.
+- **shows what it carries.** Its rim sparkles in a colour per modifier (up to three): ice blue for *Freeze charge*, orange
+  for fire, green for poison and acid, purple for curses and other on-hit effects, teal for path and homing modifiers, white
+  for plain numbers like *Damage plus*.
+
+Field resonance also works inside a trigger payload: `Spark bolt with trigger → Field resonance → Freeze charge → Circle of
+fervour` (or `… → Freeze charge → Resonant field`) puts an imbuing freezing circle where the bolt lands.
 
 Circles cast without Field resonance behave exactly like vanilla.
 
@@ -42,6 +51,8 @@ Excluded:
 | Burning field | Field resonance → Burning trail → Circle of fervour |
 | Seeker field | Field resonance → Homing → Damage plus → Circle of stillness |
 | Pure freezing field | Freeze charge → Resonant field |
+| Thrown freezing field | Spark bolt with trigger → Freeze charge → Resonant field |
+| Cursing field | Venomous curse → Resonant field |
 
 Cast the field, then shoot through it with any other wand.
 
@@ -79,10 +90,12 @@ flipped and plain. Each mod works without the other.
 ## Known limits
 
 - *Electric charge* imbues its electric damage, but not its lightning on hit.
-- Hit-effect modifiers (curses, petrify, critical on …) imbue projectiles but don't act over the circle's area.
-- Field resonance has to be in the **same cast** as the circle (Resonant field always is); it doesn't reach a circle inside a trigger payload.
+- Critical-hit modifiers (*Critical plus*, *Critical on burning/wet/oiled/bloody*) only work as part of a hit: they imbue
+  projectiles but do nothing over the circle's area.
+- Field resonance has to be in the **same shot** as the circle: in the same cast, or together with it in one trigger
+  payload. Field resonance outside a trigger doesn't reach the circle in its payload.
 - Projectiles shot by other projectiles (chain-spell children, trigger payloads, sub-projectiles) are not imbued. This keeps
-  spawning modifiers from cascading.
+  spawning modifiers from cascading. A circle from a payload still imbues bolts flying through it.
 
 ## Install
 
@@ -97,7 +110,7 @@ flipped and plain. Each mod works without the other.
 - `files/gun_append.lua` (appended to `gun.lua`): records which modifiers are cast together with Field resonance and a circle,
   and keeps their own pieces off the circle.
 - `files/scripts/field_*.lua` and `fi_lib.lua`: the circle's scripts. They apply the recipes to crossing projectiles,
-  re-apply the effects over the area, and handle the converters.
+  re-apply the effects and on-hit effects over the area, handle the converters and add the coloured rim.
 
 The design notes, research and test results are in [docs/RESEARCH.md](docs/RESEARCH.md). The per-modifier analysis is in
 [docs/modifier-catalog.md](docs/modifier-catalog.md).

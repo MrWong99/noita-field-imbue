@@ -1,0 +1,323 @@
+setup spawn 227,-79 -> test spot 227,-579	
+setup held item 174 data/entities/player.xml holstered=false	
+START frame=180 player pinned at 227,-579	
+CAL starting-wand before hold frame=180 mana=109 shots=0 nextUsable=0 reloadNext=0 ctrl.enabled=false down=false bframe=0 requireTrigger=false hidden=0	
+CAL starting-wand after hold frame=183 mana=105 shots=1 nextUsable=197 reloadNext=0 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand hold shot_counter_up=true	
+CAL starting-wand before force frame=223 mana=109 shots=1 nextUsable=197 reloadNext=0 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand after force frame=227 mana=105 shots=2 nextUsable=240 reloadNext=252 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand force shot_counter_up=true	
+equip bolt held_ok=true cards=1	
+CAL before hold frame=272 mana=10000 shots=2 nextUsable=240 reloadNext=252 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL after hold frame=275 mana=10000 shots=3 nextUsable=308 reloadNext=252 ctrl.enabled=false down=false bframe=275 requireTrigger=false hidden=0	
+CAL hold shot_counter_up=true bolt_found=true	
+CAL using fire mode hold	
+SUITE prototype, field_imbue enabled=true	
+equip imbue_freeze_field held_ok=true cards=3	
+P6 t=5 player-herd sheep FROZEN=0 | normal sheep FROZEN=1	
+P6 t=140 player-herd sheep FROZEN=0 | normal sheep FROZEN=0	
+P6 t=200 player-herd sheep FROZEN=0 | normal sheep FROZEN=1	
+P6 t=260 player-herd sheep FROZEN=0 | normal sheep FROZEN=1	
+equip imbue_freeze_field held_ok=true cards=3	
+equip fast_bolt held_ok=true cards=4	
+P7 fast-bolt launch speed 0.0deg |v|=1000 state: effects= ice=0.00 converters=0 fi_seen=nil	
+P7 fast-bolt past the field x=+125 state: effects=data/entities/misc/effect_frozen.xml, ice=0.20 converters=2 fi_seen=,570,	
+equip imbue_freeze_field held_ok=true cards=3	
+P8 cloud alive=true fi_seen=nil converters=0	
+equip imbue_freeze_field held_ok=true cards=3	
+equip freeze_bolt held_ok=true cards=2	
+P9 freeze-bolt launch speed 0.3deg |v|=729 state: effects=data/entities/misc/effect_frozen.xml, ice=0.20 converters=2 fi_seen=nil	
+P9 freeze-bolt past the field x=+130 state: effects=data/entities/misc/effect_frozen.xml, ice=0.20 converters=2 fi_seen=,592,	
+equip imbue_burn_field held_ok=true cards=3	
+P1 t=2 burning sheep 4/4	
+P1 t=5 burning sheep 4/4	
+P1 t=62 burning sheep 4/4	
+P1 t=122 burning sheep 4/4	
+P1 t=182 burning sheep 4/4	
+P1 t=242 burning sheep 4/4	
+P1 field lua mods/field_imbue/files/scripts/field_tick.lua enabled=true	
+P1 field lua mods/field_imbue/files/scripts/field_reapply.lua enabled=true	
+P1 field fi_payload=BURN_TRAIL fi_seen=nil tags=projectile_player,projectile,player_projectile,fi_field	
+equip imbue_freeze_field held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+P2 imbue-freeze trace t=3 bolt rel=+62,-5 0.9deg |v|=756 sheep rel=+180,-4	
+P2 imbue-freeze trace t=6 bolt rel=+98,-4 1.7deg |v|=694 sheep rel=+180,-4	
+P2 imbue-freeze trace t=9 bolt rel=+131,-3 2.6deg |v|=637 sheep rel=+180,-4	
+P2 imbue-freeze bolt after field: damage_game_effect_entities=data/entities/misc/effect_frozen.xml, ice=0.20 emitters=5 converters=2 fi_seen=,619,	
+P2 imbue-freeze t=10 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P2 imbue-freeze trace t=12 bolt rel=+161,-2 3.5deg |v|=585 sheep rel=+180,-4	
+P2 imbue-freeze t=20 target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.680 burning=false fireframes=0 | FROZEN=1	
+P2 imbue-freeze t=30 target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.680 burning=false fireframes=0 | FROZEN=1	
+P2 imbue-freeze t=40 target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.680 burning=false fireframes=0 | FROZEN=1	
+equip freeze_field held_ok=true cards=2	
+equip bolt held_ok=true cards=1	
+P3 control-freeze trace t=3 bolt rel=+61,-5 1.0deg |v|=743 sheep rel=+180,-4	
+P3 control-freeze trace t=6 bolt rel=+96,-4 1.8deg |v|=682 sheep rel=+180,-4	
+P3 control-freeze trace t=9 bolt rel=+128,-3 2.6deg |v|=626 sheep rel=+180,-4	
+P3 control-freeze bolt after field: damage_game_effect_entities= ice=0.00 emitters=3 converters=0 fi_seen=nil	
+P3 control-freeze t=10 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P3 control-freeze trace t=12 bolt rel=+158,-2 3.6deg |v|=574 sheep rel=+180,-4	
+P3 control-freeze t=20 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.880 burning=false fireframes=0 | FROZEN=0	
+P3 control-freeze t=30 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.880 burning=false fireframes=0 | FROZEN=0	
+P3 control-freeze t=40 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.880 burning=false fireframes=0 | FROZEN=0	
+P3 control-freeze after 3 more bolts: target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.880 burning=false fireframes=0 | FROZEN=0	
+equip imbue_bolt held_ok=true cards=2	
+P4 bolt fi_payload=nil fi_seen=nil tags=teleportable_NOT,projectile_player,projectile,player_projectile	
+equip imbue_burn_field held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+P5 imbue-fire t=10 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 | ON_FIRE=0	
+P5 imbue-fire t=20 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.853 burning=true fireframes=714 | ON_FIRE=1	
+P5 imbue-fire t=30 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.560 burning=true fireframes=704 | ON_FIRE=1	
+P5 imbue-fire t=40 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.267 burning=true fireframes=694 | ON_FIRE=1	
+equip resonant_freeze held_ok=true cards=2	
+equip bolt held_ok=true cards=1	
+P11 resonant-freeze trace t=3 bolt rel=+61,-5 1.0deg |v|=737 sheep rel=+180,-4	
+P11 resonant-freeze trace t=6 bolt rel=+96,-4 1.8deg |v|=677 sheep rel=+180,-4	
+P11 resonant-freeze trace t=9 bolt rel=+128,-3 2.6deg |v|=621 sheep rel=+180,-4	
+P11 resonant-freeze bolt after field: damage_game_effect_entities=data/entities/misc/effect_frozen.xml, ice=0.20 emitters=5 converters=2 fi_seen=,679,	
+P11 resonant-freeze t=10 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P11 resonant-freeze trace t=12 bolt rel=+157,-2 3.6deg |v|=570 sheep rel=+180,-4	
+P11 resonant-freeze t=20 target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.680 burning=false fireframes=0 | FROZEN=1	
+P11 resonant-freeze t=30 target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.680 burning=false fireframes=0 | FROZEN=1	
+P11 resonant-freeze t=40 target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.680 burning=false fireframes=0 | FROZEN=1	
+equip resonant_plain held_ok=true cards=1	
+P10 plain resonant field: sheep effects: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 CHARM=0 (want all 0)	
+P10 field fi_payload=nil fi_seen=nil tags=projectile_player,projectile,player_projectile	
+P12 recipe CURSE area entries: child:data/entities/misc/curse_init.xml[]	
+P12 recipe CURSE_WITHER_PROJECTILE area entries: child:data/entities/misc/curse_wither_projectile.xml[]	
+P12 recipe HITFX_PETRIFY area entries: child:data/entities/misc/hitfx_petrify_effect.xml[]	
+P12 recipe HITFX_TOXIC_CHARM area entries: effect:CHARM[RADIOACTIVE]	
+P12 recipe HITFX_EXPLOSION_SLIME area entries: child:data/entities/misc/hitfx_explode_explosion.xml[SLIMY]	
+P12 recipe HITFX_CRITICAL_WATER area entries: none	
+P12 recipe CRITICAL_HIT area entries: none	
+equip resonant_curse held_ok=true cards=2	
+P12 curse t=70 sheep cursed=true curse children=1 curse damage=0.08 (want 0.08) | player-herd sheep cursed=false	
+P12 curse t=200 sheep cursed=true curse children=1 curse damage=0.08 (want 0.08) | player-herd sheep cursed=false	
+P12 curse t=330 sheep cursed=true curse children=1 curse damage=0.08 (want 0.08) | player-herd sheep cursed=false	
+P12 curse t=450 sheep cursed=true curse children=1 curse damage=0.08 (want 0.08) | player-herd sheep cursed=false	
+equip resonant_wither held_ok=true cards=2	
+P12 wither t=70 curse_wither_projectile children=1 (want 1)	
+P12 wither t=190 curse_wither_projectile children=1 (want 1)	
+equip resonant_petrify held_ok=true cards=2	
+P12 petrify: wounded sheep alive=false (want false) | healthy sheep alive=true (want true)	
+equip resonant_toxic_charm held_ok=true cards=2	
+P12 toxic charm: radioactive sheep CHARM=1 (want 1) | clean sheep CHARM=0 (want 0)	
+equip resonant_slime_explosion held_ok=true cards=2	
+P12 slime explosion: slimy sheep BERSERK=0 FROZEN=0 ON_FIRE=1 OILED=0 WET=0 CHARM=0 herd=helpless hp=36.957 burning=true fireframes=719 (want dead or hurt) | clean sheep BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 (want hp=40)	
+equip trigger_freeze_field held_ok=true cards=4	
+P13a trigger payload field: shot by a projectile=true who shot is player=true	
+P13a trigger field lua mods/field_imbue/files/scripts/field_tick.lua enabled=true	
+P13a trigger field lua mods/field_imbue/files/scripts/field_reapply.lua enabled=true	
+P13a trigger field fi_payload=FREEZE fi_seen=nil tags=projectile_player,projectile,player_projectile,fi_field	
+equip timer_freeze_field held_ok=true cards=4	
+P13b timer payload field: shot by a projectile=true who shot is player=true	
+P13b timer field lua mods/field_imbue/files/scripts/field_tick.lua enabled=true	
+P13b timer field lua mods/field_imbue/files/scripts/field_reapply.lua enabled=true	
+P13b timer field fi_payload=FREEZE fi_seen=nil tags=projectile_player,projectile,player_projectile,fi_field	
+equip timer_resonant_freeze held_ok=true cards=3	
+P13c timer-resonant payload field: shot by a projectile=true who shot is player=true	
+P13c timer-resonant field lua mods/field_imbue/files/scripts/field_tick.lua enabled=true	
+P13c timer-resonant field lua mods/field_imbue/files/scripts/field_reapply.lua enabled=true	
+P13c timer-resonant field fi_payload=FREEZE fi_seen=nil tags=projectile_player,projectile,player_projectile,fi_field	
+equip timer_plain_field held_ok=true cards=3	
+P13d timer-control payload field: shot by a projectile=true who shot is player=true	
+P13d timer-control field fi_payload=nil fi_seen=nil tags=projectile_player,projectile,player_projectile	
+equip timer_freeze_field held_ok=true cards=4	
+equip bolt held_ok=true cards=1	
+P13e timer-freeze bolt trace t=3 bolt rel=+61,-5 1.0deg |v|=740 sheep rel=+180,-4	
+P13e timer-freeze bolt trace t=6 bolt rel=+96,-4 1.8deg |v|=679 sheep rel=+180,-4	
+P13e timer-freeze bolt trace t=9 bolt rel=+128,-3 2.6deg |v|=623 sheep rel=+180,-4	
+P13e timer-freeze bolt bolt after field: damage_game_effect_entities=data/entities/misc/effect_frozen.xml, ice=0.20 emitters=5 converters=2 fi_seen=,822,	
+P13e timer-freeze bolt t=10 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P13e timer-freeze bolt trace t=12 bolt rel=+157,-2 3.6deg |v|=572 sheep rel=+180,-4	
+P13e timer-freeze bolt t=20 target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.680 burning=false fireframes=0 | FROZEN=1	
+P13e timer-freeze bolt t=30 target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.680 burning=false fireframes=0 | FROZEN=1	
+P13e timer-freeze bolt t=40 target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.680 burning=false fireframes=0 | FROZEN=1	
+equip timer_resonant_freeze held_ok=true cards=3	
+equip bolt held_ok=true cards=1	
+P13f timer-resonant bolt trace t=3 bolt rel=+58,-5 1.0deg |v|=701 sheep rel=+180,-4	
+P13f timer-resonant bolt trace t=6 bolt rel=+91,-4 1.9deg |v|=643 sheep rel=+180,-4	
+P13f timer-resonant bolt trace t=9 bolt rel=+122,-3 2.8deg |v|=590 sheep rel=+180,-4	
+P13f timer-resonant bolt bolt after field: damage_game_effect_entities=data/entities/misc/effect_frozen.xml, ice=0.20 emitters=5 converters=2 fi_seen=,836,	
+P13f timer-resonant bolt t=10 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P13f timer-resonant bolt trace t=12 bolt rel=+150,-2 3.8deg |v|=542 sheep rel=+180,-4	
+P13f timer-resonant bolt trace t=15 bolt rel=+175,+0 4.9deg |v|=498 sheep rel=+180,-4	
+P13f timer-resonant bolt trace t=18 bolt rel=+199,+3 6.0deg |v|=458 sheep rel=+180,-4	
+P13f timer-resonant bolt t=20 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P13f timer-resonant bolt trace t=21 bolt rel=+220,+5 7.3deg |v|=421 sheep rel=+180,-4	
+P13f timer-resonant bolt trace t=24 bolt rel=+240,+8 8.7deg |v|=388 sheep rel=+180,-4	
+P13f timer-resonant bolt trace t=27 bolt rel=+258,+11 10.2deg |v|=357 sheep rel=+180,-4	
+P13f timer-resonant bolt trace t=30 bolt rel=+274,+15 11.8deg |v|=329 sheep rel=+180,-4	
+P13f timer-resonant bolt t=30 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P13f timer-resonant bolt trace t=33 bolt rel=+290,+18 13.5deg |v|=304 sheep rel=+180,-4	
+P13f timer-resonant bolt trace t=36 bolt rel=+304,+22 15.4deg |v|=282 sheep rel=+180,-4	
+P13f timer-resonant bolt trace t=39 bolt rel=+316,+26 17.4deg |v|=261 sheep rel=+180,-4	
+P13f timer-resonant bolt t=40 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P13f timer-resonant bolt after 3 more bolts: target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=38.560 burning=false fireframes=0 | FROZEN=1	
+equip trigger_freeze_field held_ok=true cards=4	
+equip bolt held_ok=true cards=1	
+P13g trigger-freeze bolt trace t=3 bolt rel=+56,-5 1.1deg |v|=669 sheep rel=+180,-4	
+P13g trigger-freeze bolt trace t=6 bolt rel=+88,-4 1.9deg |v|=614 sheep rel=+180,-4	
+P13g trigger-freeze bolt trace t=9 bolt rel=+117,-3 2.9deg |v|=563 sheep rel=+180,-4	
+P13g trigger-freeze bolt bolt after field: damage_game_effect_entities=data/entities/misc/effect_frozen.xml, ice=0.20 emitters=5 converters=2 fi_seen=,863,	
+P13g trigger-freeze bolt t=10 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P13g trigger-freeze bolt trace t=12 bolt rel=+143,-2 3.9deg |v|=517 sheep rel=+180,-4	
+P13g trigger-freeze bolt trace t=15 bolt rel=+168,+0 5.1deg |v|=475 sheep rel=+180,-4	
+P13g trigger-freeze bolt trace t=18 bolt rel=+190,+3 6.3deg |v|=437 sheep rel=+180,-4	
+P13g trigger-freeze bolt t=20 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P13g trigger-freeze bolt trace t=21 bolt rel=+210,+5 7.7deg |v|=402 sheep rel=+180,-4	
+P13g trigger-freeze bolt trace t=24 bolt rel=+229,+8 9.1deg |v|=370 sheep rel=+180,-4	
+P13g trigger-freeze bolt trace t=27 bolt rel=+247,+11 10.7deg |v|=341 sheep rel=+180,-4	
+P13g trigger-freeze bolt trace t=30 bolt rel=+262,+15 12.4deg |v|=315 sheep rel=+180,-4	
+P13g trigger-freeze bolt t=30 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P13g trigger-freeze bolt t=40 target sheep: BERSERK=0 FROZEN=0 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=40.000 burning=false fireframes=0 | FROZEN=0	
+P13g trigger-freeze bolt after 3 more bolts: target sheep: BERSERK=0 FROZEN=1 ON_FIRE=0 OILED=0 WET=0 CHARM=0 herd=helpless hp=39.360 burning=false fireframes=0 | FROZEN=1	
+equip imbue_freeze_field held_ok=true cards=3	
+equip timer_bolt held_ok=true cards=2	
+P14 bolt payload=false furthest x=+315 (field 172..228) fi_mods=,FREEZE, 	
+P14 bolt payload=true furthest x=+324 (field 172..228) fi_mods=nil (want nil)	
+P15 recipe colours: spark_blue=1 spark_blue_dark=2 spark_electric=5 spark_green=6 spark_player=2 spark_purple=10 spark_purple_bright=1 spark_red=15 spark_teal=69 spark_white=12 spark_yellow=8	
+P15 colour ACCELERATING_SHOT spark_teal	
+P15 colour ACID_TRAIL spark_green	
+P15 colour ANTI_HOMING spark_teal	
+P15 colour ARC_ELECTRIC spark_electric	
+P15 colour ARC_FIRE spark_yellow	
+P15 colour ARC_GUNPOWDER spark_red	
+P15 colour ARC_POISON spark_green	
+P15 colour AREA_DAMAGE spark_teal	
+P15 colour AUTOAIM spark_teal	
+P15 colour AVOIDING_ARC spark_teal	
+P15 colour BLOODLUST spark_white	
+P15 colour BLOOD_TO_ACID spark_green	
+P15 colour BOUNCE spark_white	
+P15 colour BOUNCE_EXPLOSION spark_red	
+P15 colour BOUNCE_HOLE spark_teal	
+P15 colour BOUNCE_LARPA spark_teal	
+P15 colour BOUNCE_LASER spark_teal	
+P15 colour BOUNCE_LASER_EMITTER spark_teal	
+P15 colour BOUNCE_LIGHTNING spark_electric	
+P15 colour BOUNCE_SMALL_EXPLOSION spark_red	
+P15 colour BOUNCE_SPARK spark_teal	
+P15 colour BURN_TRAIL spark_yellow	
+P15 colour CHAIN_SHOT spark_teal	
+P15 colour CHAOTIC_ARC spark_teal	
+P15 colour CLIPPING_SHOT spark_teal	
+P15 colour CLUSTERMOD spark_red	
+P15 colour COLOUR_BLUE spark_teal	
+P15 colour COLOUR_GREEN spark_teal	
+P15 colour COLOUR_INVIS spark_teal	
+P15 colour COLOUR_ORANGE spark_teal	
+P15 colour COLOUR_PURPLE spark_teal	
+P15 colour COLOUR_RAINBOW spark_teal	
+P15 colour COLOUR_RED spark_teal	
+P15 colour COLOUR_YELLOW spark_teal	
+P15 colour CRITICAL_HIT spark_white	
+P15 colour CRUMBLING_EARTH_PROJECTILE spark_teal	
+P15 colour CURSE spark_purple	
+P15 colour CURSE_WITHER_ELECTRICITY spark_purple	
+P15 colour CURSE_WITHER_EXPLOSION spark_purple	
+P15 colour CURSE_WITHER_MELEE spark_purple	
+P15 colour CURSE_WITHER_PROJECTILE spark_purple	
+P15 colour DAMAGE spark_white	
+P15 colour DECELERATING_SHOT spark_teal	
+P15 colour ELECTRIC_CHARGE spark_electric	
+P15 colour ENERGY_SHIELD_SHOT spark_teal	
+P15 colour ESSENCE_TO_POWER spark_teal	
+P15 colour EXPLOSION_REMOVE spark_red	
+P15 colour EXPLOSION_TINY spark_red	
+P15 colour EXPLOSIVE_PROJECTILE spark_red	
+P15 colour FIREBALL_RAY spark_yellow	
+P15 colour FIREBALL_RAY_ENEMY spark_yellow	
+P15 colour FIREBALL_RAY_LINE spark_yellow	
+P15 colour FIRE_TRAIL spark_yellow	
+P15 colour FIZZLE spark_teal	
+P15 colour FI_PROBE_MARKER spark_teal	
+P15 colour FLOATING_ARC spark_teal	
+P15 colour FLY_DOWNWARDS spark_teal	
+P15 colour FLY_UPWARDS spark_teal	
+P15 colour FREEZE spark_blue	
+P15 colour GRAVITY spark_white	
+P15 colour GRAVITY_ANTI spark_white	
+P15 colour GRAVITY_FIELD_ENEMY spark_purple	
+P15 colour GUNPOWDER_TRAIL spark_red	
+P15 colour HEAVY_SHOT spark_white	
+P15 colour HITFX_BURNING_CRITICAL_HIT spark_yellow	
+P15 colour HITFX_CRITICAL_BLOOD spark_red	
+P15 colour HITFX_CRITICAL_OIL spark_player	
+P15 colour HITFX_CRITICAL_WATER spark_blue_dark	
+P15 colour HITFX_EXPLOSION_ALCOHOL spark_red	
+P15 colour HITFX_EXPLOSION_ALCOHOL_GIGA spark_red	
+P15 colour HITFX_EXPLOSION_SLIME spark_red	
+P15 colour HITFX_EXPLOSION_SLIME_GIGA spark_red	
+P15 colour HITFX_PETRIFY spark_purple	
+P15 colour HITFX_TOXIC_CHARM spark_purple_bright	
+P15 colour HOMING spark_teal	
+P15 colour HOMING_ACCELERATING spark_teal	
+P15 colour HOMING_AREA spark_teal	
+P15 colour HOMING_CURSOR spark_teal	
+P15 colour HOMING_ROTATE spark_teal	
+P15 colour HOMING_SHOOTER spark_teal	
+P15 colour HOMING_SHORT spark_teal	
+P15 colour HOMING_WAND spark_teal	
+P15 colour HORIZONTAL_ARC spark_teal	
+P15 colour KNOCKBACK spark_white	
+P15 colour LARPA_CHAOS spark_teal	
+P15 colour LARPA_CHAOS_2 spark_teal	
+P15 colour LARPA_DEATH spark_teal	
+P15 colour LARPA_DOWNWARDS spark_teal	
+P15 colour LARPA_UPWARDS spark_teal	
+P15 colour LASER_EMITTER_RAY spark_teal	
+P15 colour LASER_EMITTER_WIDER spark_teal	
+P15 colour LAVA_TO_BLOOD spark_red	
+P15 colour LIFETIME spark_white	
+P15 colour LIFETIME_DOWN spark_white	
+P15 colour LIGHT spark_teal	
+P15 colour LIGHTNING_RAY spark_electric	
+P15 colour LIGHTNING_RAY_ENEMY spark_electric	
+P15 colour LIGHT_SHOT spark_white	
+P15 colour LINE_ARC spark_teal	
+P15 colour LIQUID_TO_EXPLOSION spark_red	
+P15 colour MATTER_EATER spark_teal	
+P15 colour NECROMANCY spark_purple	
+P15 colour NOLLA spark_teal	
+P15 colour OIL_TRAIL spark_player	
+P15 colour ORBIT_DISCS spark_teal	
+P15 colour ORBIT_FIREBALLS spark_yellow	
+P15 colour ORBIT_LARPA spark_teal	
+P15 colour ORBIT_LASERS spark_teal	
+P15 colour ORBIT_SHOT spark_teal	
+P15 colour PHASING_ARC spark_teal	
+P15 colour PIERCING_SHOT spark_teal	
+P15 colour PINGPONG_PATH spark_teal	
+P15 colour POISON_TRAIL spark_green	
+P15 colour QUANTUM_SPLIT spark_teal	
+P15 colour RAINBOW_TRAIL spark_purple	
+P15 colour REMOVE_BOUNCE spark_teal	
+P15 colour ROCKET_DOWNWARDS spark_teal	
+P15 colour ROCKET_OCTAGON spark_teal	
+P15 colour SINEWAVE spark_teal	
+P15 colour SPEED spark_white	
+P15 colour SPELLS_TO_POWER spark_teal	
+P15 colour SPIRALING_SHOT spark_teal	
+P15 colour STATIC_TO_SAND spark_teal	
+P15 colour TENTACLE_RAY spark_teal	
+P15 colour TENTACLE_RAY_ENEMY spark_purple	
+P15 colour TOXIC_TO_ACID spark_green	
+P15 colour TRANSMUTATION spark_teal	
+P15 colour TRUE_ORBIT spark_teal	
+P15 colour WATER_TO_POISON spark_green	
+P15 colour WATER_TRAIL spark_blue_dark	
+P15 colour ZERO_DAMAGE spark_teal	
+equip imbue_freeze_field held_ok=true cards=3	
+P15 imbue_freeze_field tint emitters: spark_blue emitters total=3	
+equip imbue_burn_field held_ok=true cards=3	
+P15 imbue_burn_field tint emitters: spark_yellow emitters total=3	
+equip imbue_mixed_field held_ok=true cards=5	
+P15 imbue_mixed_field tint emitters: spark_blue,spark_yellow,spark_teal emitters total=5	
+equip resonant_freeze held_ok=true cards=2	
+P15 resonant_freeze tint emitters: spark_blue emitters total=3	
+equip field held_ok=true cards=1	
+P15 field tint emitters: none emitters total=2	
+equip freeze_field held_ok=true cards=2	
+P15 freeze_field tint emitters: none emitters total=4	
+DONE frame=3870	

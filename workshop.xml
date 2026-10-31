@@ -5,9 +5,11 @@
 Cast it together with a circle and any other modifiers. The circle then:
 [list]
 [*]gives those modifiers to every projectile that flies through it: a Spark bolt through a Burning trail circle comes out burning, through a Homing circle it homes, through a Heavy shot circle it hits harder
-[*]keeps applying their effects (fire, freeze, oil, poison, ...) to enemies standing inside it
+[*]keeps applying their effects (fire, freeze, oil, poison, ...) to enemies standing inside it, on-hit ones too: curses keep enemies cursed, Petrify turns wounded enemies to stone, Charm on toxic sludge charms radioactive ones
 [*]runs their material converters (Water to poison, ...) over the whole circle
+[*]shows what it carries: its rim sparkles in a colour per modifier (ice blue for Freeze charge, orange for fire, purple for curses, ...)
 [/list]
+Field resonance also works inside a trigger payload: Spark bolt with trigger -> Field resonance -> Freeze charge -> Circle of fervour throws an imbuing freezing circle.
 [b]Resonant field[/b] is a new circle spell with Field resonance built in and no effect of its own: put modifiers in front of it and they go straight into the field (Freeze charge -> Resonant field).
 
 Works with 130 vanilla modifiers, and modifiers from other mods are picked up automatically. Circles cast without Field resonance stay vanilla.

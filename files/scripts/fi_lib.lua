@@ -88,7 +88,12 @@ local function negate(r)
 	end
 	if O then
 		local drop = false
-		n.extra_entities, n.converters = {}, {}
+		n.extra_entities, n.converters, n.effects = {}, {}, {}
+		for _, ef in ipairs(r.effects or {}) do
+			if not (ef.from and O.extra[ef.from]) then -- an on-hit effect of an extra that the flip turned into another one
+				n.effects[#n.effects + 1] = ef
+			end
+		end
 		for _, f in ipairs(r.extra_entities or {}) do
 			local to = O.extra[f]
 			if to then
@@ -477,6 +482,42 @@ function M.setup_converters(e, radius, ids)
 	end
 end
 
+-- show what the field carries: sparks along its rim in each modifier's colour (recipes_build.lua picks it), at most
+-- MAX_TINTS colours, in payload order. Cosmetic only, on top of the circle's own particles.
+M.MAX_TINTS = 3
+function M.tint(e, radius, ids)
+	local colours, seen = {}, {}
+	for _, id in ipairs(ids) do
+		local c = M.recipe(id).colour
+		if c and not seen[c] and #colours < M.MAX_TINTS then
+			seen[c] = true
+			colours[#colours + 1] = c
+		end
+	end
+	for _, c in ipairs(colours) do
+		local pe = EntityAddComponent2(e, "ParticleEmitterComponent", {
+			_tags = "fi_tint",
+			emitted_material_name = c,
+			lifetime_min = 0.5,
+			lifetime_max = 1.5,
+			count_min = math.ceil(6 / #colours),
+			count_max = math.ceil(6 / #colours),
+			render_on_grid = true,
+			fade_based_on_lifetime = true,
+			cosmetic_force_create = false,
+			airflow_force = 0.3,
+			airflow_time = 0.01,
+			airflow_scale = 0.05,
+			emission_interval_min_frames = 1,
+			emission_interval_max_frames = 1,
+			emit_cosmetic_particles = true,
+			is_emitting = true,
+		})
+		ComponentSetValue2(pe, "gravity", 0, 0)
+		ComponentSetValue2(pe, "area_circle_radius", radius - 3, radius)
+	end
+end
+
 -- A projectile cast in the same shot as an imbuing field that is not a field itself (a multicast bolt, a wall, a
 -- black hole): files/gun_append.lua kept the modifiers' own pieces off the whole shot, so give them back, and mark the
 -- projectile as already carrying the shot's modifiers so its sibling field doesn't add their numbers a second time.
@@ -531,13 +572,43 @@ local function owned_here(t)
 	return not ok or mine ~= false
 end
 
--- re-apply the modifiers' game effects to creatures inside the field (never the caster, matching the vanilla
--- circle, §6.2). Effects whose name could not be read are skipped, so nothing stacks.
+-- does the creature meet an on-hit effect's conditions (game effects it must have, e.g. ON_FIRE or SLIMY)?
+local function meets(t, cond)
+	for _, name in ipairs(cond or {}) do
+		if GameGetGameEffectCount(t, name) == 0 then
+			return false
+		end
+	end
+	return true
+end
+
+local function has_child(t, file)
+	for _, k in ipairs(EntityGetAllChildren(t) or {}) do
+		if EntityGetFilename(k) == file then
+			return true
+		end
+	end
+	return false
+end
+
+-- what a hit with a HitEffectComponent LOAD_*_CHILD_ENTITY does: the child goes onto the creature and knows who shot
+-- (curses and petrify credit their kills to it)
+local function load_child(t, file, shooter)
+	local x, y = EntityGetTransform(t)
+	local child = EntityLoad(file, x, y)
+	EntityAddComponent2(child, "VariableStorageComponent", { name = "projectile_who_shot", value_int = shooter })
+	EntityAddChild(t, child)
+end
+
+-- re-apply the modifiers' game effects and on-hit effects (curses, petrify, explosions on slimy enemies, ...) to
+-- creatures inside the field (never the caster, matching the vanilla circle, §6.2). Nothing stacks: a game effect only
+-- when the creature doesn't have it (effects whose name could not be read are skipped), a child only when the creature
+-- doesn't carry one from the same file (or the tag it leaves behind).
 function M.reapply_area(field, x, y, radius, ids)
 	local effects = {}
 	for _, id in ipairs(ids) do
 		for _, ef in ipairs(M.recipe(id).effects or {}) do
-			if ef.effect then
+			if ef.effect or ef.child then
 				effects[#effects + 1] = ef
 			end
 		end
@@ -559,7 +630,11 @@ function M.reapply_area(field, x, y, radius, ids)
 				seen[t] = true
 				if t ~= shooter and EntityGetRootEntity(t) == t and is_target(t, friendly, shooter_herd) and owned_here(t) then
 					for _, ef in ipairs(effects) do
-						if GameGetGameEffectCount(t, ef.effect) == 0 then
+						if ef.child then
+							if meets(t, ef.cond) and not has_child(t, ef.file) and not (ef.guard and EntityHasTag(t, ef.guard)) then
+								load_child(t, ef.file, shooter)
+							end
+						elseif meets(t, ef.cond) and GameGetGameEffectCount(t, ef.effect) == 0 then
 							LoadGameEffectEntityTo(t, ef.file)
 						end
 					end
