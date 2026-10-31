@@ -16,14 +16,14 @@ modifiers. The circle then:
 - **keeps applying their effects to enemies inside it.** Vanilla circles apply an effect once per creature; an imbuing circle
   re-applies fire, freeze, oil, poison, … every second. On-hit modifiers work over the circle too: *Venomous curse* and the
   *Weakening curses* keep enemies inside cursed, *Petrify* turns wounded enemies to stone, *Charm on toxic sludge* charms
-  radioactive ones, *Explosion on slimy/drunk enemies* blows up slimy or drunk ones. Nothing stacks: an enemy that already
-  has the curse or effect is left alone.
+  radioactive ones, and the *Personal fireball thrower/lightning caster/tentacler* turn enemies inside into throwers, as a
+  hit would. Nothing stacks: an enemy that already has the curse or effect is left alone.
 - **runs their material converters over the whole circle** (*Water to poison*, *Freeze charge*'s freezing, …).
 - **carries none of the modifiers' own pieces itself.** No burning or snowy centre, and it doesn't drift off with *Gravity* or
   *Fly upwards*.
-- **shows what it carries.** Its rim sparkles in a colour per modifier (up to three): ice blue for *Freeze charge*, orange
-  for fire, green for poison and acid, purple for curses and other on-hit effects, teal for path and homing modifiers, white
-  for plain numbers like *Damage plus*.
+- **shows what it carries.** Its rim sparkles in a colour per modifier (up to three), for example ice blue for *Freeze
+  charge*, orange for fire, green for poison and acid, red for explosions, purple for curses and *Petrify*, teal for path and
+  homing modifiers, white for plain numbers like *Damage plus*.
 
 Field resonance also works inside a trigger payload: `Spark bolt with trigger → Field resonance → Freeze charge → Circle of
 fervour` (or `… → Freeze charge → Resonant field`) puts an imbuing freezing circle where the bolt lands.
@@ -85,13 +85,17 @@ cast:
 
 Sign flip can go before or after Field resonance: `Field resonance → Sign flip → Damage plus → Circle of fervour` and
 `Sign flip → Field resonance → Damage plus → Circle of fervour` both work. The same modifier can be in one circle both
-flipped and plain. Each mod works without the other.
+flipped and plain. On-hit modifiers that Sign flip turns into another one (*Venomous curse* into a blessing,
+*Charm on toxic sludge* into berserk, …) only imbue bolts, not the circle's area, and a flipped modifier whose pieces were
+swapped shows a white rim. Each mod works without the other.
 
 ## Known limits
 
 - *Electric charge* imbues its electric damage, but not its lightning on hit.
-- Critical-hit modifiers (*Critical plus*, *Critical on burning/wet/oiled/bloody*) only work as part of a hit: they imbue
-  projectiles but do nothing over the circle's area.
+- Some on-hit modifiers only imbue projectiles and do nothing over the circle's area:
+  - critical hits (*Critical plus*, *Critical on burning/wet/oiled/bloody*), which only work as part of a hit;
+  - *Explosion on slimy/drunk enemies* and *Personal gravity field*: what they put on the enemy is a projectile with no
+    owner, which would also hit you and your allies (and explode again every second).
 - Field resonance has to be in the **same shot** as the circle: in the same cast, or together with it in one trigger
   payload. Field resonance outside a trigger doesn't reach the circle in its payload.
 - Projectiles shot by other projectiles (chain-spell children, trigger payloads, sub-projectiles) are not imbued. This keeps

@@ -976,11 +976,11 @@ end
 
 -- P12: hit-effect modifiers act over a field's area: Venomous curse (keeps the sheep cursed, damage not stacking, never
 -- the caster's herd), Weakening curse (one child), Petrify (only wounded sheep), Charm on toxic sludge (only the
--- radioactive sheep), Explosion on slimy enemies (only the slimy sheep). Critical on wet stays on-hit (no area entry in its
--- recipe).
+-- radioactive sheep). Explosion on slimy enemies, Personal gravity field, Critical on wet and Critical plus stay on-hit (no
+-- area entry in their recipes).
 local function proto_hit_area()
 	local R = dofile_once("mods/field_imbue/files/gen/recipes.lua")
-	for _, id in ipairs({ "CURSE", "CURSE_WITHER_PROJECTILE", "HITFX_PETRIFY", "HITFX_TOXIC_CHARM", "HITFX_EXPLOSION_SLIME", "HITFX_CRITICAL_WATER", "CRITICAL_HIT" }) do
+	for _, id in ipairs({ "CURSE", "CURSE_WITHER_PROJECTILE", "HITFX_PETRIFY", "HITFX_TOXIC_CHARM", "HITFX_EXPLOSION_SLIME", "GRAVITY_FIELD_ENEMY", "FIREBALL_RAY_ENEMY", "HITFX_CRITICAL_WATER", "CRITICAL_HIT" }) do
 		local parts = {}
 		for _, ef in ipairs(R[id] and R[id].effects or {}) do
 			parts[#parts + 1] = (ef.child and "child:" or "effect:") .. tostring(ef.effect or ef.file) .. "[" .. table.concat(ef.cond or {}, "+") .. "]"
@@ -1053,7 +1053,7 @@ local function proto_hit_area()
 		wait(10)
 	end
 
-	-- the explosion (radius 15) takes a 40 hp sheep out; the clean sheep is 30 px away
+	-- explosions on slimy enemies stay imbue-only (an ownerless blast every second would hit the caster too)
 	field = cast_field("resonant_slime_explosion", fx, fy)
 	if not field then
 		log("P12 slime explosion NO FIELD")
@@ -1062,7 +1062,7 @@ local function proto_hit_area()
 		LoadGameEffectEntityTo(slimy, "data/entities/misc/effect_slimy.xml")
 		local clean = spawn_sheep(fx - 15, fy)
 		wait(75)
-		log("P12 slime explosion: slimy sheep " .. effects(slimy), "(want dead or hurt)", "| clean sheep " .. effects(clean), "(want hp=40)")
+		log("P12 slime explosion (imbue-only): slimy sheep " .. effects(slimy), "(want hp=40)", "| clean sheep " .. effects(clean), "(want hp=40)")
 		kill(field, slimy, clean)
 		wait(10)
 	end
@@ -1103,17 +1103,18 @@ local function proto_payload_bolt()
 				if not b then
 					local pc = EntityGetFirstComponentIncludingDisabled(p, "ProjectileComponent")
 					local parent = pc and ComponentGetValue2(pc, "mEntityThatShot") or 0
-					b = { payload = parent ~= 0 and parent ~= player, maxx = -1e9 }
+					b = { payload = parent ~= 0 and parent ~= player, minx = 1e9, maxx = -1e9 }
 					bolts[p] = b
 				end
 				b.mods = fi_get(p, "fi_mods") or b.mods
+				b.minx = math.min(b.minx, (EntityGetTransform(p)) - PX)
 				b.maxx = math.max(b.maxx, (EntityGetTransform(p)) - PX)
 			end
 		end
 		wait(1)
 	end
 	for _, b in pairs(bolts) do
-		log("P14 bolt payload=" .. tostring(b.payload), ("furthest x=%+.0f"):format(b.maxx), "(field 172..228)",
+		log("P14 bolt payload=" .. tostring(b.payload), ("x from %+.0f to %+.0f"):format(b.minx, b.maxx), "(field 172..228: want across it)",
 			"fi_mods=" .. tostring(b.mods), b.payload and "(want nil)" or "")
 	end
 	kill(field)
@@ -1134,7 +1135,9 @@ local function proto_tint()
 	local by_colour, ids = {}, {}
 	for id, r in pairs(R) do
 		ids[#ids + 1] = id
-		by_colour[r.colour or "nil"] = (by_colour[r.colour or "nil"] or 0) + 1
+		if not id:find("^FI_PROBE") then -- this probe's own test card
+			by_colour[r.colour or "nil"] = (by_colour[r.colour or "nil"] or 0) + 1
+		end
 	end
 	table.sort(ids)
 	local summary = {}

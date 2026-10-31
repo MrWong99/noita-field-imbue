@@ -1,15 +1,15 @@
 setup spawn 227,-79 -> test spot 227,-579	
-setup held item 176 data/entities/player.xml holstered=false	
+setup held item 155 data/entities/player.xml holstered=false	
 START frame=180 player pinned at 227,-579	
-CAL starting-wand before hold frame=180 mana=83 shots=0 nextUsable=0 reloadNext=0 ctrl.enabled=false down=false bframe=0 requireTrigger=false hidden=0	
-CAL starting-wand after hold frame=183 mana=79 shots=1 nextUsable=199 reloadNext=0 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand before hold frame=180 mana=91 shots=0 nextUsable=0 reloadNext=0 ctrl.enabled=false down=false bframe=0 requireTrigger=false hidden=0	
+CAL starting-wand after hold frame=183 mana=87 shots=1 nextUsable=198 reloadNext=208 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
 CAL starting-wand hold shot_counter_up=true	
-CAL starting-wand before force frame=223 mana=83 shots=1 nextUsable=199 reloadNext=0 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
-CAL starting-wand after force frame=227 mana=79 shots=2 nextUsable=242 reloadNext=248 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand before force frame=223 mana=91 shots=1 nextUsable=198 reloadNext=208 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL starting-wand after force frame=227 mana=87 shots=2 nextUsable=241 reloadNext=251 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
 CAL starting-wand force shot_counter_up=true	
 equip bolt held_ok=true cards=1	
-CAL before hold frame=272 mana=10000 shots=2 nextUsable=242 reloadNext=248 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
-CAL after hold frame=275 mana=10000 shots=3 nextUsable=308 reloadNext=248 ctrl.enabled=false down=false bframe=275 requireTrigger=false hidden=0	
+CAL before hold frame=272 mana=10000 shots=2 nextUsable=241 reloadNext=251 ctrl.enabled=false down=false bframe=183 requireTrigger=false hidden=0	
+CAL after hold frame=275 mana=10000 shots=3 nextUsable=308 reloadNext=251 ctrl.enabled=false down=false bframe=275 requireTrigger=false hidden=0	
 CAL hold shot_counter_up=true bolt_found=true	
 CAL using fire mode hold	
 SUITE sweep, field_imbue enabled=true	
@@ -19,7 +19,7 @@ equip r1 held_ok=true cards=3
 R1 no field in shot: bolt HomingComponents=1 (want >=1)	
 equip r2_control held_ok=true cards=4	
 equip r2 held_ok=true cards=5	
-R2 multicast speed: control 222, with Field resonance 201 (want equal, not x2.5 again)	
+R2 multicast speed: control 223, with Field resonance 211 (want equal, not x2.5 again)	
 equip r3 held_ok=true cards=5	
 R3.1 multicast homing: bolt HomingComponents=1 (want 1) field HomingComponents=0 (want 0) bolt fi_mods=,HOMING,	
 equip r3 held_ok=true cards=5	
@@ -423,4 +423,4 @@ equip sweep held_ok=true cards=3
 equip bolt held_ok=true cards=1	
 SWEEP ZERO_DAMAGE payload=true centre=clean bolt_imbued=true	
 SWEEP summary: 130 modifiers, payload 130, clean centre 130, bolt imbued 130	
-DONE frame=12946	
+DONE frame=12932	

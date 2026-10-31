@@ -87,7 +87,7 @@ local function negate(r)
 		different = true
 	end
 	if O then
-		local drop = false
+		local drop, remapped = false, false
 		n.extra_entities, n.converters, n.effects = {}, {}, {}
 		for _, ef in ipairs(r.effects or {}) do
 			if not (ef.from and O.extra[ef.from]) then -- an on-hit effect of an extra that the flip turned into another one
@@ -97,7 +97,7 @@ local function negate(r)
 		for _, f in ipairs(r.extra_entities or {}) do
 			local to = O.extra[f]
 			if to then
-				different = true
+				different, remapped = true, true
 				if O.drops_effects[f] then -- a poured material became an eater: it works over the field too
 					drop = true
 					n.converters[#n.converters + 1] = to
@@ -118,10 +118,14 @@ local function negate(r)
 				n.extra_entities[#n.extra_entities + 1] = e
 				n.converters[#n.converters + 1] = e
 			end
-			different, drop = true, true
+			different, drop, remapped = true, true, true
 		end
 		if drop then
 			n.game_effect_entities, n.effects = {}, {}
+		end
+		-- the rim colour was picked for the unflipped pieces: a flip that swapped them shows plain white
+		if remapped then
+			n.colour = "spark_white"
 		end
 		if implosion then
 			n.extra_entities[#n.extra_entities + 1] = O.implode

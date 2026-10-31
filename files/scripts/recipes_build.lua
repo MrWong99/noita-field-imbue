@@ -180,6 +180,10 @@ local function hit_effect(attrs, from)
 		if not hit.effect or hit.effect == "CUSTOM" then
 			return nil
 		end
+	elseif file_text(file):find("<ProjectileComponent", 1, true) then
+		-- a projectile child (Explosion on slimy/drunk enemies, Personal gravity field) has no owner to spare the caster,
+		-- its herd and other players, and would go off again on every re-apply: those stay imbue-only
+		return nil
 	else
 		hit.child, hit.guard = true, HIT_GUARD_TAGS[file]
 	end
